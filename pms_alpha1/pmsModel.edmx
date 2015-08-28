@@ -1,0 +1,2395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="somyatrans_pmsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Client" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AlternetEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LandlineNo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SkypeID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="StateID" Type="int" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PaymentModeID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_ClientPM">
+          <Key>
+            <PropertyRef Name="ClientPMID" />
+          </Key>
+          <Property Name="ClientPMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="AlternateEmail" Type="varchar" MaxLength="100" />
+          <Property Name="LandlineNo" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="SkypeID" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_M_City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="int" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Currency">
+          <Key>
+            <PropertyRef Name="CurrencyID" />
+          </Key>
+          <Property Name="CurrencyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Currency" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_DeliverStatus">
+          <Key>
+            <PropertyRef Name="DeliverStatusID" />
+          </Key>
+          <Property Name="DeliverStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeliverStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Designation">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TBL_M_Domain">
+          <Key>
+            <PropertyRef Name="DomainID" />
+          </Key>
+          <Property Name="DomainID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Domain" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Staus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Expertise">
+          <Key>
+            <PropertyRef Name="ExpertiseID" />
+          </Key>
+          <Property Name="ExpertiseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Expertise" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Staus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_M_ModeOfPayment">
+          <Key>
+            <PropertyRef Name="ModeOfPaymentID" />
+          </Key>
+          <Property Name="ModeOfPaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModeOfPayment" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_OnTimeDeliverStatus">
+          <Key>
+            <PropertyRef Name="OnTimeDeliverStatusID" />
+          </Key>
+          <Property Name="OnTimeDeliverStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OnTimeDeliverStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_ProcessStatus">
+          <Key>
+            <PropertyRef Name="ProcessStatusID" />
+          </Key>
+          <Property Name="ProcessStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_M_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Services">
+          <Key>
+            <PropertyRef Name="ServicesID" />
+          </Key>
+          <Property Name="ServicesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Services" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Staus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Software">
+          <Key>
+            <PropertyRef Name="SoftwareID" />
+          </Key>
+          <Property Name="SoftwareID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Software" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Staus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_TaskType">
+          <Key>
+            <PropertyRef Name="TaskTypeID" />
+          </Key>
+          <Property Name="TaskTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Unit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Unit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Staus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_WorkStatus">
+          <Key>
+            <PropertyRef Name="WorkStatusID" />
+          </Key>
+          <Property Name="WorkStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectCode" Type="varchar" MaxLength="30" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="ClientPMID" Type="int" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="30" />
+          <Property Name="ProjectDescription" Type="varchar" MaxLength="200" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_ProjectTask">
+          <Key>
+            <PropertyRef Name="ProjectTaskID" />
+          </Key>
+          <Property Name="ProjectTaskID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="bigint" />
+          <Property Name="TaskTypeID" Type="bigint" />
+          <Property Name="SourceLanguageID" Type="int" />
+          <Property Name="TargetLanguageID" Type="int" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="Volume" Type="int" />
+          <Property Name="RecievedDate" Type="datetime" />
+          <Property Name="DeadlineDate" Type="datetime" />
+          <Property Name="WorkStatusID" Type="int" />
+          <Property Name="ProcessStatusID" Type="int" />
+          <Property Name="DeliverStatusID" Type="int" />
+          <Property Name="OnTimeDeliverStatusID" Type="int" />
+          <Property Name="EndRemarks" Type="varchar" MaxLength="200" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_TrackerPC">
+          <Key>
+            <PropertyRef Name="TrackerPCID" />
+          </Key>
+          <Property Name="TrackerPCID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="bigint" />
+          <Property Name="HOTimePC" Type="datetime" />
+          <Property Name="HBTimePC" Type="datetime" />
+          <Property Name="HBRTimePC" Type="datetime" />
+          <Property Name="HBDTimePC" Type="datetime" />
+          <Property Name="WorkStatusID" Type="int" />
+          <Property Name="AssignedTo" Type="int" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="POID" Type="int" />
+          <Property Name="Remarks" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TBL_TrackerPM">
+          <Key>
+            <PropertyRef Name="TrackerPMID" />
+          </Key>
+          <Property Name="TrackerPMID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="bigint" />
+          <Property Name="HOTimePM" Type="datetime" />
+          <Property Name="HBTimePM" Type="datetime" />
+          <Property Name="HBRTimePM" Type="datetime" />
+          <Property Name="HBDTimePM" Type="datetime" />
+          <Property Name="WorkStatusID" Type="int" />
+          <Property Name="AssignedTo" Type="int" />
+          <Property Name="Remarks" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TBL_TrackerSPC">
+          <Key>
+            <PropertyRef Name="TrackerSPCID" />
+          </Key>
+          <Property Name="TrackerSPCID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="bigint" />
+          <Property Name="HOTimeSPC" Type="datetime" />
+          <Property Name="HBTimeSPC" Type="datetime" />
+          <Property Name="HBRTimeSPC" Type="datetime" />
+          <Property Name="HBDTimeSPC" Type="datetime" />
+          <Property Name="WorkStatusID" Type="int" />
+          <Property Name="AssignedTo" Type="int" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="POID" Type="int" />
+          <Property Name="Remarks" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TBL_VenderSoftware">
+          <Key>
+            <PropertyRef Name="VenderSoftwareID" />
+          </Key>
+          <Property Name="VenderSoftwareID" Type="bigint" Nullable="false" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="SoftwareID" Type="int" />
+          <Property Name="Version" Type="varchar" MaxLength="50" />
+          <Property Name="ExpertiseID" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_Vendor">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorCode" Type="varchar" MaxLength="100" />
+          <Property Name="Vendor" Type="varchar" MaxLength="100" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="DateOfAniversary" Type="date" />
+          <Property Name="NativeLanguage" Type="varchar" MaxLength="100" />
+          <Property Name="AcademicQualification" Type="varchar" MaxLength="100" />
+          <Property Name="ProfessionalQualification" Type="varchar" MaxLength="100" />
+          <Property Name="EmailID" Type="varchar" MaxLength="100" />
+          <Property Name="AlternateEmailID" Type="varchar" MaxLength="100" />
+          <Property Name="SkypeID" Type="varchar" MaxLength="100" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="10" />
+          <Property Name="AlternateNumber" Type="varchar" MaxLength="10" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="HouseNo/StreetNo" Type="varchar" MaxLength="50" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="PinCode" Type="varchar" MaxLength="50" />
+          <Property Name="DomainID" Type="int" />
+          <Property Name="Capacity" Type="varchar" MaxLength="100" />
+          <Property Name="WorkingTime" Type="time" Precision="7" />
+          <Property Name="RAM" Type="varchar" MaxLength="10" />
+          <Property Name="HDD" Type="varchar" MaxLength="10" />
+          <Property Name="OS" Type="varchar" MaxLength="10" />
+          <Property Name="MSOffice" Type="varchar" MaxLength="10" />
+          <Property Name="AnyOtherExprience" Type="varchar" MaxLength="100" />
+          <Property Name="TypeofConnection" Type="varchar" MaxLength="100" />
+          <Property Name="InternetAvailabilityPerDay" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="InternetServiceProvider" Type="varchar" MaxLength="100" />
+          <Property Name="InternetDownTimePerDay" Type="varchar" MaxLength="100" />
+          <Property Name="ElectricityDownTimePerDay" Type="varchar" MaxLength="100" />
+          <Property Name="AccountHolderName" Type="varchar" MaxLength="100" />
+          <Property Name="BankName" Type="varchar" MaxLength="100" />
+          <Property Name="BankAddress" Type="varchar" MaxLength="500" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="IFSCCode" Type="varchar" MaxLength="50" />
+          <Property Name="BranchCode" Type="varchar" MaxLength="50" />
+          <Property Name="PanNumber" Type="varchar" MaxLength="50" />
+          <Property Name="IBANCode" Type="varchar" MaxLength="50" />
+          <Property Name="SWIFTCode" Type="varchar" MaxLength="50" />
+          <Property Name="MoneyBookerID" Type="varchar" MaxLength="100" />
+          <Property Name="PayPalID" Type="varchar" MaxLength="100" />
+          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="RegisteredBy" Type="varchar" MaxLength="100" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="100" />
+          <Property Name="UploadPhoto" Type="varchar" MaxLength="100" />
+          <Property Name="UploadPersonalID" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_VendorLanguagePair">
+          <Key>
+            <PropertyRef Name="VendorLanguagePairID" />
+          </Key>
+          <Property Name="VendorLanguagePairID" Type="bigint" Nullable="false" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="SourceLanguageID" Type="int" />
+          <Property Name="TargetLanguageID" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_VendorService">
+          <Key>
+            <PropertyRef Name="VendorServiceID" />
+          </Key>
+          <Property Name="VendorServiceID" Type="bigint" Nullable="false" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="ServiceID" Type="int" />
+          <Property Name="QuotedCurrencyID" Type="int" />
+          <Property Name="QuotedRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FreezedCurrenyID" Type="int" />
+          <Property Name="FreezedRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <Association Name="FK_TBL_ClientPM_TBL_Client">
+          <End Role="TBL_Client" Type="Self.TBL_Client" Multiplicity="0..1" />
+          <End Role="TBL_ClientPM" Type="Self.TBL_ClientPM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="TBL_ClientPM">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_M_City_TBL_M_State">
+          <End Role="TBL_M_State" Type="Self.TBL_M_State" Multiplicity="1" />
+          <End Role="TBL_M_City" Type="Self.TBL_M_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="TBL_M_City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_M_State_TBL_M_Country">
+          <End Role="TBL_M_Country" Type="Self.TBL_M_Country" Multiplicity="1" />
+          <End Role="TBL_M_State" Type="Self.TBL_M_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TBL_M_State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Project_TBL_Client">
+          <End Role="TBL_Client" Type="Self.TBL_Client" Multiplicity="0..1" />
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="TBL_Project">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Project_TBL_ClientPM">
+          <End Role="TBL_ClientPM" Type="Self.TBL_ClientPM" Multiplicity="0..1" />
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ClientPM">
+              <PropertyRef Name="ClientPMID" />
+            </Principal>
+            <Dependent Role="TBL_Project">
+              <PropertyRef Name="ClientPMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_DeliverStatus">
+          <End Role="TBL_M_DeliverStatus" Type="Self.TBL_M_DeliverStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_DeliverStatus">
+              <PropertyRef Name="DeliverStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="DeliverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_Language">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="SourceLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_Language1">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="TargetLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus">
+          <End Role="TBL_M_OnTimeDeliverStatus" Type="Self.TBL_M_OnTimeDeliverStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_OnTimeDeliverStatus">
+              <PropertyRef Name="OnTimeDeliverStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="OnTimeDeliverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_ProcessStatus">
+          <End Role="TBL_M_ProcessStatus" Type="Self.TBL_M_ProcessStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_ProcessStatus">
+              <PropertyRef Name="ProcessStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="ProcessStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_TaskType">
+          <End Role="TBL_M_TaskType" Type="Self.TBL_M_TaskType" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_TaskType">
+              <PropertyRef Name="TaskTypeID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="TaskTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_Unit">
+          <End Role="TBL_M_Unit" Type="Self.TBL_M_Unit" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPC_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPC" Type="Self.TBL_TrackerPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPC">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPC_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPC" Type="Self.TBL_TrackerPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPC">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPC_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPC" Type="Self.TBL_TrackerPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPC">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPM_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPM" Type="Self.TBL_TrackerPM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPM">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPM_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPM" Type="Self.TBL_TrackerPM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPM">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerSPC_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_TrackerSPC" Type="Self.TBL_TrackerSPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerSPC">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerSPC_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_TrackerSPC" Type="Self.TBL_TrackerSPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerSPC">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerSPC_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_TrackerSPC" Type="Self.TBL_TrackerSPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerSPC">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VenderSoftware_TBL_M_Expertise">
+          <End Role="TBL_M_Expertise" Type="Self.TBL_M_Expertise" Multiplicity="0..1" />
+          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Expertise">
+              <PropertyRef Name="ExpertiseID" />
+            </Principal>
+            <Dependent Role="TBL_VenderSoftware">
+              <PropertyRef Name="ExpertiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VenderSoftware_TBL_M_Software">
+          <End Role="TBL_M_Software" Type="Self.TBL_M_Software" Multiplicity="0..1" />
+          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Software">
+              <PropertyRef Name="SoftwareID" />
+            </Principal>
+            <Dependent Role="TBL_VenderSoftware">
+              <PropertyRef Name="SoftwareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VenderSoftware_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VenderSoftware">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_City">
+          <End Role="TBL_M_City" Type="Self.TBL_M_City" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_Country">
+          <End Role="TBL_M_Country" Type="Self.TBL_M_Country" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_Domain">
+          <End Role="TBL_M_Domain" Type="Self.TBL_M_Domain" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Domain">
+              <PropertyRef Name="DomainID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_State">
+          <End Role="TBL_M_State" Type="Self.TBL_M_State" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorLanguagePair_TBL_M_Language">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_VendorLanguagePair" Type="Self.TBL_VendorLanguagePair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_VendorLanguagePair">
+              <PropertyRef Name="SourceLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorLanguagePair_TBL_M_Language1">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_VendorLanguagePair" Type="Self.TBL_VendorLanguagePair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_VendorLanguagePair">
+              <PropertyRef Name="TargetLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorLanguagePair_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VendorLanguagePair" Type="Self.TBL_VendorLanguagePair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorLanguagePair">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency">
+          <End Role="TBL_M_Currency" Type="Self.TBL_M_Currency" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="FreezedCurrenyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency">
+          <End Role="TBL_M_Currency" Type="Self.TBL_M_Currency" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="QuotedCurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_TBL_M_Services">
+          <End Role="TBL_M_Services" Type="Self.TBL_M_Services" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Services">
+              <PropertyRef Name="ServicesID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="somyatrans_pmsDBModelStoreContainer">
+          <EntitySet Name="TBL_Client" EntityType="Self.TBL_Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ClientPM" EntityType="Self.TBL_ClientPM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_City" EntityType="Self.TBL_M_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Country" EntityType="Self.TBL_M_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Currency" EntityType="Self.TBL_M_Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_DeliverStatus" EntityType="Self.TBL_M_DeliverStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Designation" EntityType="Self.TBL_M_Designation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Domain" EntityType="Self.TBL_M_Domain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Expertise" EntityType="Self.TBL_M_Expertise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Language" EntityType="Self.TBL_M_Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_ModeOfPayment" EntityType="Self.TBL_M_ModeOfPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_OnTimeDeliverStatus" EntityType="Self.TBL_M_OnTimeDeliverStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_ProcessStatus" EntityType="Self.TBL_M_ProcessStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Role" EntityType="Self.TBL_M_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Services" EntityType="Self.TBL_M_Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Software" EntityType="Self.TBL_M_Software" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_State" EntityType="Self.TBL_M_State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_TaskType" EntityType="Self.TBL_M_TaskType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Unit" EntityType="Self.TBL_M_Unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_WorkStatus" EntityType="Self.TBL_M_WorkStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Project" EntityType="Self.TBL_Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ProjectTask" EntityType="Self.TBL_ProjectTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_TrackerPC" EntityType="Self.TBL_TrackerPC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_TrackerPM" EntityType="Self.TBL_TrackerPM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_TrackerSPC" EntityType="Self.TBL_TrackerSPC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_VenderSoftware" EntityType="Self.TBL_VenderSoftware" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Vendor" EntityType="Self.TBL_Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_VendorLanguagePair" EntityType="Self.TBL_VendorLanguagePair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_VendorService" EntityType="Self.TBL_VendorService" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBL_ClientPM_TBL_Client" Association="Self.FK_TBL_ClientPM_TBL_Client">
+            <End Role="TBL_Client" EntitySet="TBL_Client" />
+            <End Role="TBL_ClientPM" EntitySet="TBL_ClientPM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_M_City_TBL_M_State" Association="Self.FK_TBL_M_City_TBL_M_State">
+            <End Role="TBL_M_State" EntitySet="TBL_M_State" />
+            <End Role="TBL_M_City" EntitySet="TBL_M_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_M_State_TBL_M_Country" Association="Self.FK_TBL_M_State_TBL_M_Country">
+            <End Role="TBL_M_Country" EntitySet="TBL_M_Country" />
+            <End Role="TBL_M_State" EntitySet="TBL_M_State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Project_TBL_Client" Association="Self.FK_TBL_Project_TBL_Client">
+            <End Role="TBL_Client" EntitySet="TBL_Client" />
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Project_TBL_ClientPM" Association="Self.FK_TBL_Project_TBL_ClientPM">
+            <End Role="TBL_ClientPM" EntitySet="TBL_ClientPM" />
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_DeliverStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_DeliverStatus">
+            <End Role="TBL_M_DeliverStatus" EntitySet="TBL_M_DeliverStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_Language" Association="Self.FK_TBL_ProjectTask_TBL_M_Language">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_Language1" Association="Self.FK_TBL_ProjectTask_TBL_M_Language1">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus">
+            <End Role="TBL_M_OnTimeDeliverStatus" EntitySet="TBL_M_OnTimeDeliverStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_ProcessStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_ProcessStatus">
+            <End Role="TBL_M_ProcessStatus" EntitySet="TBL_M_ProcessStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_TaskType" Association="Self.FK_TBL_ProjectTask_TBL_M_TaskType">
+            <End Role="TBL_M_TaskType" EntitySet="TBL_M_TaskType" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_Unit" Association="Self.FK_TBL_ProjectTask_TBL_M_Unit">
+            <End Role="TBL_M_Unit" EntitySet="TBL_M_Unit" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_WorkStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_Project" Association="Self.FK_TBL_ProjectTask_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPC_TBL_M_WorkStatus" Association="Self.FK_TBL_TrackerPC_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_TrackerPC" EntitySet="TBL_TrackerPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPC_TBL_Project" Association="Self.FK_TBL_TrackerPC_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_TrackerPC" EntitySet="TBL_TrackerPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPC_TBL_Vendor" Association="Self.FK_TBL_TrackerPC_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_TrackerPC" EntitySet="TBL_TrackerPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPM_TBL_M_WorkStatus" Association="Self.FK_TBL_TrackerPM_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_TrackerPM" EntitySet="TBL_TrackerPM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPM_TBL_Project" Association="Self.FK_TBL_TrackerPM_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_TrackerPM" EntitySet="TBL_TrackerPM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerSPC_TBL_M_WorkStatus" Association="Self.FK_TBL_TrackerSPC_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerSPC_TBL_Project" Association="Self.FK_TBL_TrackerSPC_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerSPC_TBL_Vendor" Association="Self.FK_TBL_TrackerSPC_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Expertise" Association="Self.FK_TBL_VenderSoftware_TBL_M_Expertise">
+            <End Role="TBL_M_Expertise" EntitySet="TBL_M_Expertise" />
+            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Software" Association="Self.FK_TBL_VenderSoftware_TBL_M_Software">
+            <End Role="TBL_M_Software" EntitySet="TBL_M_Software" />
+            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_Vendor" Association="Self.FK_TBL_VenderSoftware_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_City" Association="Self.FK_TBL_Vendor_TBL_M_City">
+            <End Role="TBL_M_City" EntitySet="TBL_M_City" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Country" Association="Self.FK_TBL_Vendor_TBL_M_Country">
+            <End Role="TBL_M_Country" EntitySet="TBL_M_Country" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Domain" Association="Self.FK_TBL_Vendor_TBL_M_Domain">
+            <End Role="TBL_M_Domain" EntitySet="TBL_M_Domain" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_State" Association="Self.FK_TBL_Vendor_TBL_M_State">
+            <End Role="TBL_M_State" EntitySet="TBL_M_State" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_M_Language" Association="Self.FK_TBL_VendorLanguagePair_TBL_M_Language">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_VendorLanguagePair" EntitySet="TBL_VendorLanguagePair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_M_Language1" Association="Self.FK_TBL_VendorLanguagePair_TBL_M_Language1">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_VendorLanguagePair" EntitySet="TBL_VendorLanguagePair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_Vendor" Association="Self.FK_TBL_VendorLanguagePair_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorLanguagePair" EntitySet="TBL_VendorLanguagePair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency" Association="Self.FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency">
+            <End Role="TBL_M_Currency" EntitySet="TBL_M_Currency" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency" Association="Self.FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency">
+            <End Role="TBL_M_Currency" EntitySet="TBL_M_Currency" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_TBL_M_Services" Association="Self.FK_TBL_VendorService_TBL_M_Services">
+            <End Role="TBL_M_Services" EntitySet="TBL_M_Services" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_TBL_Vendor" Association="Self.FK_TBL_VendorService_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="somyatrans_pmsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Client" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AlternetEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LandlineNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SkypeID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_ClientPM" Relationship="Self.FK_TBL_ClientPM_TBL_Client" FromRole="TBL_Client" ToRole="TBL_ClientPM" />
+          <NavigationProperty Name="TBL_Project" Relationship="Self.FK_TBL_Project_TBL_Client" FromRole="TBL_Client" ToRole="TBL_Project" />
+        </EntityType>
+        <EntityType Name="TBL_ClientPM">
+          <Key>
+            <PropertyRef Name="ClientPMID" />
+          </Key>
+          <Property Name="ClientPMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LandlineNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SkypeID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_Client" Relationship="Self.FK_TBL_ClientPM_TBL_Client" FromRole="TBL_ClientPM" ToRole="TBL_Client" />
+          <NavigationProperty Name="TBL_Project" Relationship="Self.FK_TBL_Project_TBL_ClientPM" FromRole="TBL_ClientPM" ToRole="TBL_Project" />
+        </EntityType>
+        <EntityType Name="TBL_M_City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_M_State" Relationship="Self.FK_TBL_M_City_TBL_M_State" FromRole="TBL_M_City" ToRole="TBL_M_State" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_Vendor_TBL_M_City" FromRole="TBL_M_City" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_M_Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_M_State" Relationship="Self.FK_TBL_M_State_TBL_M_Country" FromRole="TBL_M_Country" ToRole="TBL_M_State" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_Vendor_TBL_M_Country" FromRole="TBL_M_Country" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_M_Currency">
+          <Key>
+            <PropertyRef Name="CurrencyID" />
+          </Key>
+          <Property Name="CurrencyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_VendorService" Relationship="Self.FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency" FromRole="TBL_M_Currency" ToRole="TBL_VendorService" />
+          <NavigationProperty Name="TBL_VendorService1" Relationship="Self.FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency" FromRole="TBL_M_Currency" ToRole="TBL_VendorService" />
+        </EntityType>
+        <EntityType Name="TBL_M_DeliverStatus">
+          <Key>
+            <PropertyRef Name="DeliverStatusID" />
+          </Key>
+          <Property Name="DeliverStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeliverStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_M_DeliverStatus" FromRole="TBL_M_DeliverStatus" ToRole="TBL_ProjectTask" />
+        </EntityType>
+        <EntityType Name="TBL_M_Designation">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBL_M_Domain">
+          <Key>
+            <PropertyRef Name="DomainID" />
+          </Key>
+          <Property Name="DomainID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Domain" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Staus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_Vendor_TBL_M_Domain" FromRole="TBL_M_Domain" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_M_Expertise">
+          <Key>
+            <PropertyRef Name="ExpertiseID" />
+          </Key>
+          <Property Name="ExpertiseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Expertise" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Staus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_VenderSoftware" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Expertise" FromRole="TBL_M_Expertise" ToRole="TBL_VenderSoftware" />
+        </EntityType>
+        <EntityType Name="TBL_M_Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_M_Language" FromRole="TBL_M_Language" ToRole="TBL_ProjectTask" />
+          <NavigationProperty Name="TBL_ProjectTask1" Relationship="Self.FK_TBL_ProjectTask_TBL_M_Language1" FromRole="TBL_M_Language" ToRole="TBL_ProjectTask" />
+          <NavigationProperty Name="TBL_VendorLanguagePair" Relationship="Self.FK_TBL_VendorLanguagePair_TBL_M_Language" FromRole="TBL_M_Language" ToRole="TBL_VendorLanguagePair" />
+          <NavigationProperty Name="TBL_VendorLanguagePair1" Relationship="Self.FK_TBL_VendorLanguagePair_TBL_M_Language1" FromRole="TBL_M_Language" ToRole="TBL_VendorLanguagePair" />
+        </EntityType>
+        <EntityType Name="TBL_M_ModeOfPayment">
+          <Key>
+            <PropertyRef Name="ModeOfPaymentID" />
+          </Key>
+          <Property Name="ModeOfPaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModeOfPayment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_OnTimeDeliverStatus">
+          <Key>
+            <PropertyRef Name="OnTimeDeliverStatusID" />
+          </Key>
+          <Property Name="OnTimeDeliverStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OnTimeDeliverStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus" FromRole="TBL_M_OnTimeDeliverStatus" ToRole="TBL_ProjectTask" />
+        </EntityType>
+        <EntityType Name="TBL_M_ProcessStatus">
+          <Key>
+            <PropertyRef Name="ProcessStatusID" />
+          </Key>
+          <Property Name="ProcessStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_M_ProcessStatus" FromRole="TBL_M_ProcessStatus" ToRole="TBL_ProjectTask" />
+        </EntityType>
+        <EntityType Name="TBL_M_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_M_Services">
+          <Key>
+            <PropertyRef Name="ServicesID" />
+          </Key>
+          <Property Name="ServicesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Services" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Staus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_VendorService" Relationship="Self.FK_TBL_VendorService_TBL_M_Services" FromRole="TBL_M_Services" ToRole="TBL_VendorService" />
+        </EntityType>
+        <EntityType Name="TBL_M_Software">
+          <Key>
+            <PropertyRef Name="SoftwareID" />
+          </Key>
+          <Property Name="SoftwareID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Software" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Staus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_VenderSoftware" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Software" FromRole="TBL_M_Software" ToRole="TBL_VenderSoftware" />
+        </EntityType>
+        <EntityType Name="TBL_M_State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_M_City" Relationship="Self.FK_TBL_M_City_TBL_M_State" FromRole="TBL_M_State" ToRole="TBL_M_City" />
+          <NavigationProperty Name="TBL_M_Country" Relationship="Self.FK_TBL_M_State_TBL_M_Country" FromRole="TBL_M_State" ToRole="TBL_M_Country" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_Vendor_TBL_M_State" FromRole="TBL_M_State" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_M_TaskType">
+          <Key>
+            <PropertyRef Name="TaskTypeID" />
+          </Key>
+          <Property Name="TaskTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_M_TaskType" FromRole="TBL_M_TaskType" ToRole="TBL_ProjectTask" />
+        </EntityType>
+        <EntityType Name="TBL_M_Unit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Staus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_M_Unit" FromRole="TBL_M_Unit" ToRole="TBL_ProjectTask" />
+        </EntityType>
+        <EntityType Name="TBL_M_WorkStatus">
+          <Key>
+            <PropertyRef Name="WorkStatusID" />
+          </Key>
+          <Property Name="WorkStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_M_WorkStatus" FromRole="TBL_M_WorkStatus" ToRole="TBL_ProjectTask" />
+          <NavigationProperty Name="TBL_TrackerPC" Relationship="Self.FK_TBL_TrackerPC_TBL_M_WorkStatus" FromRole="TBL_M_WorkStatus" ToRole="TBL_TrackerPC" />
+          <NavigationProperty Name="TBL_TrackerPM" Relationship="Self.FK_TBL_TrackerPM_TBL_M_WorkStatus" FromRole="TBL_M_WorkStatus" ToRole="TBL_TrackerPM" />
+          <NavigationProperty Name="TBL_TrackerSPC" Relationship="Self.FK_TBL_TrackerSPC_TBL_M_WorkStatus" FromRole="TBL_M_WorkStatus" ToRole="TBL_TrackerSPC" />
+        </EntityType>
+        <EntityType Name="TBL_Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="ClientPMID" Type="Int32" />
+          <Property Name="ProjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_Client" Relationship="Self.FK_TBL_Project_TBL_Client" FromRole="TBL_Project" ToRole="TBL_Client" />
+          <NavigationProperty Name="TBL_ClientPM" Relationship="Self.FK_TBL_Project_TBL_ClientPM" FromRole="TBL_Project" ToRole="TBL_ClientPM" />
+          <NavigationProperty Name="TBL_ProjectTask" Relationship="Self.FK_TBL_ProjectTask_TBL_Project" FromRole="TBL_Project" ToRole="TBL_ProjectTask" />
+          <NavigationProperty Name="TBL_TrackerPC" Relationship="Self.FK_TBL_TrackerPC_TBL_Project" FromRole="TBL_Project" ToRole="TBL_TrackerPC" />
+          <NavigationProperty Name="TBL_TrackerPM" Relationship="Self.FK_TBL_TrackerPM_TBL_Project" FromRole="TBL_Project" ToRole="TBL_TrackerPM" />
+          <NavigationProperty Name="TBL_TrackerSPC" Relationship="Self.FK_TBL_TrackerSPC_TBL_Project" FromRole="TBL_Project" ToRole="TBL_TrackerSPC" />
+        </EntityType>
+        <EntityType Name="TBL_ProjectTask">
+          <Key>
+            <PropertyRef Name="ProjectTaskID" />
+          </Key>
+          <Property Name="ProjectTaskID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int64" />
+          <Property Name="TaskTypeID" Type="Int64" />
+          <Property Name="SourceLanguageID" Type="Int32" />
+          <Property Name="TargetLanguageID" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="Volume" Type="Int32" />
+          <Property Name="RecievedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeadlineDate" Type="DateTime" Precision="3" />
+          <Property Name="WorkStatusID" Type="Int32" />
+          <Property Name="ProcessStatusID" Type="Int32" />
+          <Property Name="DeliverStatusID" Type="Int32" />
+          <Property Name="OnTimeDeliverStatusID" Type="Int32" />
+          <Property Name="EndRemarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_M_DeliverStatus" Relationship="Self.FK_TBL_ProjectTask_TBL_M_DeliverStatus" FromRole="TBL_ProjectTask" ToRole="TBL_M_DeliverStatus" />
+          <NavigationProperty Name="TBL_M_Language" Relationship="Self.FK_TBL_ProjectTask_TBL_M_Language" FromRole="TBL_ProjectTask" ToRole="TBL_M_Language" />
+          <NavigationProperty Name="TBL_M_Language1" Relationship="Self.FK_TBL_ProjectTask_TBL_M_Language1" FromRole="TBL_ProjectTask" ToRole="TBL_M_Language" />
+          <NavigationProperty Name="TBL_M_OnTimeDeliverStatus" Relationship="Self.FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus" FromRole="TBL_ProjectTask" ToRole="TBL_M_OnTimeDeliverStatus" />
+          <NavigationProperty Name="TBL_M_ProcessStatus" Relationship="Self.FK_TBL_ProjectTask_TBL_M_ProcessStatus" FromRole="TBL_ProjectTask" ToRole="TBL_M_ProcessStatus" />
+          <NavigationProperty Name="TBL_M_TaskType" Relationship="Self.FK_TBL_ProjectTask_TBL_M_TaskType" FromRole="TBL_ProjectTask" ToRole="TBL_M_TaskType" />
+          <NavigationProperty Name="TBL_M_Unit" Relationship="Self.FK_TBL_ProjectTask_TBL_M_Unit" FromRole="TBL_ProjectTask" ToRole="TBL_M_Unit" />
+          <NavigationProperty Name="TBL_M_WorkStatus" Relationship="Self.FK_TBL_ProjectTask_TBL_M_WorkStatus" FromRole="TBL_ProjectTask" ToRole="TBL_M_WorkStatus" />
+          <NavigationProperty Name="TBL_Project" Relationship="Self.FK_TBL_ProjectTask_TBL_Project" FromRole="TBL_ProjectTask" ToRole="TBL_Project" />
+        </EntityType>
+        <EntityType Name="TBL_TrackerPC">
+          <Key>
+            <PropertyRef Name="TrackerPCID" />
+          </Key>
+          <Property Name="TrackerPCID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int64" />
+          <Property Name="HOTimePC" Type="DateTime" Precision="3" />
+          <Property Name="HBTimePC" Type="DateTime" Precision="3" />
+          <Property Name="HBRTimePC" Type="DateTime" Precision="3" />
+          <Property Name="HBDTimePC" Type="DateTime" Precision="3" />
+          <Property Name="WorkStatusID" Type="Int32" />
+          <Property Name="AssignedTo" Type="Int32" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="POID" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_M_WorkStatus" Relationship="Self.FK_TBL_TrackerPC_TBL_M_WorkStatus" FromRole="TBL_TrackerPC" ToRole="TBL_M_WorkStatus" />
+          <NavigationProperty Name="TBL_Project" Relationship="Self.FK_TBL_TrackerPC_TBL_Project" FromRole="TBL_TrackerPC" ToRole="TBL_Project" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_TrackerPC_TBL_Vendor" FromRole="TBL_TrackerPC" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_TrackerPM">
+          <Key>
+            <PropertyRef Name="TrackerPMID" />
+          </Key>
+          <Property Name="TrackerPMID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int64" />
+          <Property Name="HOTimePM" Type="DateTime" Precision="3" />
+          <Property Name="HBTimePM" Type="DateTime" Precision="3" />
+          <Property Name="HBRTimePM" Type="DateTime" Precision="3" />
+          <Property Name="HBDTimePM" Type="DateTime" Precision="3" />
+          <Property Name="WorkStatusID" Type="Int32" />
+          <Property Name="AssignedTo" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_M_WorkStatus" Relationship="Self.FK_TBL_TrackerPM_TBL_M_WorkStatus" FromRole="TBL_TrackerPM" ToRole="TBL_M_WorkStatus" />
+          <NavigationProperty Name="TBL_Project" Relationship="Self.FK_TBL_TrackerPM_TBL_Project" FromRole="TBL_TrackerPM" ToRole="TBL_Project" />
+        </EntityType>
+        <EntityType Name="TBL_TrackerSPC">
+          <Key>
+            <PropertyRef Name="TrackerSPCID" />
+          </Key>
+          <Property Name="TrackerSPCID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int64" />
+          <Property Name="HOTimeSPC" Type="DateTime" Precision="3" />
+          <Property Name="HBTimeSPC" Type="DateTime" Precision="3" />
+          <Property Name="HBRTimeSPC" Type="DateTime" Precision="3" />
+          <Property Name="HBDTimeSPC" Type="DateTime" Precision="3" />
+          <Property Name="WorkStatusID" Type="Int32" />
+          <Property Name="AssignedTo" Type="Int32" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="POID" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_M_WorkStatus" Relationship="Self.FK_TBL_TrackerSPC_TBL_M_WorkStatus" FromRole="TBL_TrackerSPC" ToRole="TBL_M_WorkStatus" />
+          <NavigationProperty Name="TBL_Project" Relationship="Self.FK_TBL_TrackerSPC_TBL_Project" FromRole="TBL_TrackerSPC" ToRole="TBL_Project" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_TrackerSPC_TBL_Vendor" FromRole="TBL_TrackerSPC" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_VenderSoftware">
+          <Key>
+            <PropertyRef Name="VenderSoftwareID" />
+          </Key>
+          <Property Name="VenderSoftwareID" Type="Int64" Nullable="false" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="SoftwareID" Type="Int32" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExpertiseID" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_M_Expertise" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Expertise" FromRole="TBL_VenderSoftware" ToRole="TBL_M_Expertise" />
+          <NavigationProperty Name="TBL_M_Software" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Software" FromRole="TBL_VenderSoftware" ToRole="TBL_M_Software" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_VenderSoftware_TBL_Vendor" FromRole="TBL_VenderSoftware" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_Vendor">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Vendor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="DateOfAniversary" Type="DateTime" Precision="0" />
+          <Property Name="NativeLanguage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AcademicQualification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProfessionalQualification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateEmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SkypeID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="HouseNo_StreetNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CityID" Type="Int32" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DomainID" Type="Int32" />
+          <Property Name="Capacity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WorkingTime" Type="Time" Precision="7" />
+          <Property Name="RAM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HDD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MSOffice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AnyOtherExprience" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TypeofConnection" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InternetAvailabilityPerDay" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InternetServiceProvider" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InternetDownTimePerDay" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ElectricityDownTimePerDay" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AccountHolderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BankAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IFSCCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PanNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IBANCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SWIFTCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MoneyBookerID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PayPalID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="RegisteredBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UploadPhoto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UploadPersonalID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_M_City" Relationship="Self.FK_TBL_Vendor_TBL_M_City" FromRole="TBL_Vendor" ToRole="TBL_M_City" />
+          <NavigationProperty Name="TBL_M_Country" Relationship="Self.FK_TBL_Vendor_TBL_M_Country" FromRole="TBL_Vendor" ToRole="TBL_M_Country" />
+          <NavigationProperty Name="TBL_M_Domain" Relationship="Self.FK_TBL_Vendor_TBL_M_Domain" FromRole="TBL_Vendor" ToRole="TBL_M_Domain" />
+          <NavigationProperty Name="TBL_M_State" Relationship="Self.FK_TBL_Vendor_TBL_M_State" FromRole="TBL_Vendor" ToRole="TBL_M_State" />
+          <NavigationProperty Name="TBL_TrackerPC" Relationship="Self.FK_TBL_TrackerPC_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_TrackerPC" />
+          <NavigationProperty Name="TBL_TrackerSPC" Relationship="Self.FK_TBL_TrackerSPC_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_TrackerSPC" />
+          <NavigationProperty Name="TBL_VenderSoftware" Relationship="Self.FK_TBL_VenderSoftware_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VenderSoftware" />
+          <NavigationProperty Name="TBL_VendorLanguagePair" Relationship="Self.FK_TBL_VendorLanguagePair_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorLanguagePair" />
+          <NavigationProperty Name="TBL_VendorService" Relationship="Self.FK_TBL_VendorService_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorService" />
+        </EntityType>
+        <EntityType Name="TBL_VendorLanguagePair">
+          <Key>
+            <PropertyRef Name="VendorLanguagePairID" />
+          </Key>
+          <Property Name="VendorLanguagePairID" Type="Int64" Nullable="false" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="SourceLanguageID" Type="Int32" />
+          <Property Name="TargetLanguageID" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_M_Language" Relationship="Self.FK_TBL_VendorLanguagePair_TBL_M_Language" FromRole="TBL_VendorLanguagePair" ToRole="TBL_M_Language" />
+          <NavigationProperty Name="TBL_M_Language1" Relationship="Self.FK_TBL_VendorLanguagePair_TBL_M_Language1" FromRole="TBL_VendorLanguagePair" ToRole="TBL_M_Language" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_VendorLanguagePair_TBL_Vendor" FromRole="TBL_VendorLanguagePair" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_VendorService">
+          <Key>
+            <PropertyRef Name="VendorServiceID" />
+          </Key>
+          <Property Name="VendorServiceID" Type="Int64" Nullable="false" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="ServiceID" Type="Int32" />
+          <Property Name="QuotedCurrencyID" Type="Int32" />
+          <Property Name="QuotedRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreezedCurrenyID" Type="Int32" />
+          <Property Name="FreezedRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_M_Currency" Relationship="Self.FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency" FromRole="TBL_VendorService" ToRole="TBL_M_Currency" />
+          <NavigationProperty Name="TBL_M_Currency1" Relationship="Self.FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency" FromRole="TBL_VendorService" ToRole="TBL_M_Currency" />
+          <NavigationProperty Name="TBL_M_Services" Relationship="Self.FK_TBL_VendorService_TBL_M_Services" FromRole="TBL_VendorService" ToRole="TBL_M_Services" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_VendorService_TBL_Vendor" FromRole="TBL_VendorService" ToRole="TBL_Vendor" />
+        </EntityType>
+        <Association Name="FK_TBL_ClientPM_TBL_Client">
+          <End Role="TBL_Client" Type="Self.TBL_Client" Multiplicity="0..1" />
+          <End Role="TBL_ClientPM" Type="Self.TBL_ClientPM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="TBL_ClientPM">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Project_TBL_Client">
+          <End Role="TBL_Client" Type="Self.TBL_Client" Multiplicity="0..1" />
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="TBL_Project">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Project_TBL_ClientPM">
+          <End Role="TBL_ClientPM" Type="Self.TBL_ClientPM" Multiplicity="0..1" />
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ClientPM">
+              <PropertyRef Name="ClientPMID" />
+            </Principal>
+            <Dependent Role="TBL_Project">
+              <PropertyRef Name="ClientPMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_M_City_TBL_M_State">
+          <End Role="TBL_M_State" Type="Self.TBL_M_State" Multiplicity="1" />
+          <End Role="TBL_M_City" Type="Self.TBL_M_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="TBL_M_City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_City">
+          <End Role="TBL_M_City" Type="Self.TBL_M_City" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_M_State_TBL_M_Country">
+          <End Role="TBL_M_Country" Type="Self.TBL_M_Country" Multiplicity="1" />
+          <End Role="TBL_M_State" Type="Self.TBL_M_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TBL_M_State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_Country">
+          <End Role="TBL_M_Country" Type="Self.TBL_M_Country" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency">
+          <End Role="TBL_M_Currency" Type="Self.TBL_M_Currency" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="FreezedCurrenyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency">
+          <End Role="TBL_M_Currency" Type="Self.TBL_M_Currency" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="QuotedCurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_DeliverStatus">
+          <End Role="TBL_M_DeliverStatus" Type="Self.TBL_M_DeliverStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_DeliverStatus">
+              <PropertyRef Name="DeliverStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="DeliverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_Domain">
+          <End Role="TBL_M_Domain" Type="Self.TBL_M_Domain" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Domain">
+              <PropertyRef Name="DomainID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VenderSoftware_TBL_M_Expertise">
+          <End Role="TBL_M_Expertise" Type="Self.TBL_M_Expertise" Multiplicity="0..1" />
+          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Expertise">
+              <PropertyRef Name="ExpertiseID" />
+            </Principal>
+            <Dependent Role="TBL_VenderSoftware">
+              <PropertyRef Name="ExpertiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_Language">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="SourceLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_Language1">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="TargetLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorLanguagePair_TBL_M_Language">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_VendorLanguagePair" Type="Self.TBL_VendorLanguagePair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_VendorLanguagePair">
+              <PropertyRef Name="SourceLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorLanguagePair_TBL_M_Language1">
+          <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
+          <End Role="TBL_VendorLanguagePair" Type="Self.TBL_VendorLanguagePair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="TBL_VendorLanguagePair">
+              <PropertyRef Name="TargetLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus">
+          <End Role="TBL_M_OnTimeDeliverStatus" Type="Self.TBL_M_OnTimeDeliverStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_OnTimeDeliverStatus">
+              <PropertyRef Name="OnTimeDeliverStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="OnTimeDeliverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_ProcessStatus">
+          <End Role="TBL_M_ProcessStatus" Type="Self.TBL_M_ProcessStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_ProcessStatus">
+              <PropertyRef Name="ProcessStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="ProcessStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_TBL_M_Services">
+          <End Role="TBL_M_Services" Type="Self.TBL_M_Services" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Services">
+              <PropertyRef Name="ServicesID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VenderSoftware_TBL_M_Software">
+          <End Role="TBL_M_Software" Type="Self.TBL_M_Software" Multiplicity="0..1" />
+          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Software">
+              <PropertyRef Name="SoftwareID" />
+            </Principal>
+            <Dependent Role="TBL_VenderSoftware">
+              <PropertyRef Name="SoftwareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_Vendor_TBL_M_State">
+          <End Role="TBL_M_State" Type="Self.TBL_M_State" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_TaskType">
+          <End Role="TBL_M_TaskType" Type="Self.TBL_M_TaskType" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_TaskType">
+              <PropertyRef Name="TaskTypeID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="TaskTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_Unit">
+          <End Role="TBL_M_Unit" Type="Self.TBL_M_Unit" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPC_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPC" Type="Self.TBL_TrackerPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPC">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPM_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPM" Type="Self.TBL_TrackerPM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPM">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerSPC_TBL_M_WorkStatus">
+          <End Role="TBL_M_WorkStatus" Type="Self.TBL_M_WorkStatus" Multiplicity="0..1" />
+          <End Role="TBL_TrackerSPC" Type="Self.TBL_TrackerSPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerSPC">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ProjectTask_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_ProjectTask">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPC_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPC" Type="Self.TBL_TrackerPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPC">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPM_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPM" Type="Self.TBL_TrackerPM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPM">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerSPC_TBL_Project">
+          <End Role="TBL_Project" Type="Self.TBL_Project" Multiplicity="0..1" />
+          <End Role="TBL_TrackerSPC" Type="Self.TBL_TrackerSPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerSPC">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerPC_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_TrackerPC" Type="Self.TBL_TrackerPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerPC">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TrackerSPC_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_TrackerSPC" Type="Self.TBL_TrackerSPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_TrackerSPC">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VenderSoftware_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VenderSoftware">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorLanguagePair_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VendorLanguagePair" Type="Self.TBL_VendorLanguagePair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorLanguagePair">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorService_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VendorService" Type="Self.TBL_VendorService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorService">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="somyatrans_pmsDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_Client" EntityType="Self.TBL_Client" />
+          <EntitySet Name="TBL_ClientPM" EntityType="Self.TBL_ClientPM" />
+          <EntitySet Name="TBL_M_City" EntityType="Self.TBL_M_City" />
+          <EntitySet Name="TBL_M_Country" EntityType="Self.TBL_M_Country" />
+          <EntitySet Name="TBL_M_Currency" EntityType="Self.TBL_M_Currency" />
+          <EntitySet Name="TBL_M_DeliverStatus" EntityType="Self.TBL_M_DeliverStatus" />
+          <EntitySet Name="TBL_M_Designation" EntityType="Self.TBL_M_Designation" />
+          <EntitySet Name="TBL_M_Domain" EntityType="Self.TBL_M_Domain" />
+          <EntitySet Name="TBL_M_Expertise" EntityType="Self.TBL_M_Expertise" />
+          <EntitySet Name="TBL_M_Language" EntityType="Self.TBL_M_Language" />
+          <EntitySet Name="TBL_M_ModeOfPayment" EntityType="Self.TBL_M_ModeOfPayment" />
+          <EntitySet Name="TBL_M_OnTimeDeliverStatus" EntityType="Self.TBL_M_OnTimeDeliverStatus" />
+          <EntitySet Name="TBL_M_ProcessStatus" EntityType="Self.TBL_M_ProcessStatus" />
+          <EntitySet Name="TBL_M_Role" EntityType="Self.TBL_M_Role" />
+          <EntitySet Name="TBL_M_Services" EntityType="Self.TBL_M_Services" />
+          <EntitySet Name="TBL_M_Software" EntityType="Self.TBL_M_Software" />
+          <EntitySet Name="TBL_M_State" EntityType="Self.TBL_M_State" />
+          <EntitySet Name="TBL_M_TaskType" EntityType="Self.TBL_M_TaskType" />
+          <EntitySet Name="TBL_M_Unit" EntityType="Self.TBL_M_Unit" />
+          <EntitySet Name="TBL_M_WorkStatus" EntityType="Self.TBL_M_WorkStatus" />
+          <EntitySet Name="TBL_Project" EntityType="Self.TBL_Project" />
+          <EntitySet Name="TBL_ProjectTask" EntityType="Self.TBL_ProjectTask" />
+          <EntitySet Name="TBL_TrackerPC" EntityType="Self.TBL_TrackerPC" />
+          <EntitySet Name="TBL_TrackerPM" EntityType="Self.TBL_TrackerPM" />
+          <EntitySet Name="TBL_TrackerSPC" EntityType="Self.TBL_TrackerSPC" />
+          <EntitySet Name="TBL_VenderSoftware" EntityType="Self.TBL_VenderSoftware" />
+          <EntitySet Name="TBL_Vendor" EntityType="Self.TBL_Vendor" />
+          <EntitySet Name="TBL_VendorLanguagePair" EntityType="Self.TBL_VendorLanguagePair" />
+          <EntitySet Name="TBL_VendorService" EntityType="Self.TBL_VendorService" />
+          <AssociationSet Name="FK_TBL_ClientPM_TBL_Client" Association="Self.FK_TBL_ClientPM_TBL_Client">
+            <End Role="TBL_Client" EntitySet="TBL_Client" />
+            <End Role="TBL_ClientPM" EntitySet="TBL_ClientPM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Project_TBL_Client" Association="Self.FK_TBL_Project_TBL_Client">
+            <End Role="TBL_Client" EntitySet="TBL_Client" />
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Project_TBL_ClientPM" Association="Self.FK_TBL_Project_TBL_ClientPM">
+            <End Role="TBL_ClientPM" EntitySet="TBL_ClientPM" />
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_M_City_TBL_M_State" Association="Self.FK_TBL_M_City_TBL_M_State">
+            <End Role="TBL_M_State" EntitySet="TBL_M_State" />
+            <End Role="TBL_M_City" EntitySet="TBL_M_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_City" Association="Self.FK_TBL_Vendor_TBL_M_City">
+            <End Role="TBL_M_City" EntitySet="TBL_M_City" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_M_State_TBL_M_Country" Association="Self.FK_TBL_M_State_TBL_M_Country">
+            <End Role="TBL_M_Country" EntitySet="TBL_M_Country" />
+            <End Role="TBL_M_State" EntitySet="TBL_M_State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Country" Association="Self.FK_TBL_Vendor_TBL_M_Country">
+            <End Role="TBL_M_Country" EntitySet="TBL_M_Country" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency" Association="Self.FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency">
+            <End Role="TBL_M_Currency" EntitySet="TBL_M_Currency" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency" Association="Self.FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency">
+            <End Role="TBL_M_Currency" EntitySet="TBL_M_Currency" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_DeliverStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_DeliverStatus">
+            <End Role="TBL_M_DeliverStatus" EntitySet="TBL_M_DeliverStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Domain" Association="Self.FK_TBL_Vendor_TBL_M_Domain">
+            <End Role="TBL_M_Domain" EntitySet="TBL_M_Domain" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Expertise" Association="Self.FK_TBL_VenderSoftware_TBL_M_Expertise">
+            <End Role="TBL_M_Expertise" EntitySet="TBL_M_Expertise" />
+            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_Language" Association="Self.FK_TBL_ProjectTask_TBL_M_Language">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_Language1" Association="Self.FK_TBL_ProjectTask_TBL_M_Language1">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_M_Language" Association="Self.FK_TBL_VendorLanguagePair_TBL_M_Language">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_VendorLanguagePair" EntitySet="TBL_VendorLanguagePair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_M_Language1" Association="Self.FK_TBL_VendorLanguagePair_TBL_M_Language1">
+            <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
+            <End Role="TBL_VendorLanguagePair" EntitySet="TBL_VendorLanguagePair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus">
+            <End Role="TBL_M_OnTimeDeliverStatus" EntitySet="TBL_M_OnTimeDeliverStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_ProcessStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_ProcessStatus">
+            <End Role="TBL_M_ProcessStatus" EntitySet="TBL_M_ProcessStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_TBL_M_Services" Association="Self.FK_TBL_VendorService_TBL_M_Services">
+            <End Role="TBL_M_Services" EntitySet="TBL_M_Services" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Software" Association="Self.FK_TBL_VenderSoftware_TBL_M_Software">
+            <End Role="TBL_M_Software" EntitySet="TBL_M_Software" />
+            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_State" Association="Self.FK_TBL_Vendor_TBL_M_State">
+            <End Role="TBL_M_State" EntitySet="TBL_M_State" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_TaskType" Association="Self.FK_TBL_ProjectTask_TBL_M_TaskType">
+            <End Role="TBL_M_TaskType" EntitySet="TBL_M_TaskType" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_Unit" Association="Self.FK_TBL_ProjectTask_TBL_M_Unit">
+            <End Role="TBL_M_Unit" EntitySet="TBL_M_Unit" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_WorkStatus" Association="Self.FK_TBL_ProjectTask_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPC_TBL_M_WorkStatus" Association="Self.FK_TBL_TrackerPC_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_TrackerPC" EntitySet="TBL_TrackerPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPM_TBL_M_WorkStatus" Association="Self.FK_TBL_TrackerPM_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_TrackerPM" EntitySet="TBL_TrackerPM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerSPC_TBL_M_WorkStatus" Association="Self.FK_TBL_TrackerSPC_TBL_M_WorkStatus">
+            <End Role="TBL_M_WorkStatus" EntitySet="TBL_M_WorkStatus" />
+            <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ProjectTask_TBL_Project" Association="Self.FK_TBL_ProjectTask_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPC_TBL_Project" Association="Self.FK_TBL_TrackerPC_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_TrackerPC" EntitySet="TBL_TrackerPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPM_TBL_Project" Association="Self.FK_TBL_TrackerPM_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_TrackerPM" EntitySet="TBL_TrackerPM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerSPC_TBL_Project" Association="Self.FK_TBL_TrackerSPC_TBL_Project">
+            <End Role="TBL_Project" EntitySet="TBL_Project" />
+            <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerPC_TBL_Vendor" Association="Self.FK_TBL_TrackerPC_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_TrackerPC" EntitySet="TBL_TrackerPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TrackerSPC_TBL_Vendor" Association="Self.FK_TBL_TrackerSPC_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_Vendor" Association="Self.FK_TBL_VenderSoftware_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_Vendor" Association="Self.FK_TBL_VendorLanguagePair_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorLanguagePair" EntitySet="TBL_VendorLanguagePair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorService_TBL_Vendor" Association="Self.FK_TBL_VendorService_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="somyatrans_pmsDBModelStoreContainer" CdmEntityContainer="somyatrans_pmsDBContext">
+          <EntitySetMapping Name="TBL_Client">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_Client">
+              <MappingFragment StoreEntitySet="TBL_Client">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AlternetEmail" ColumnName="AlternetEmail" />
+                <ScalarProperty Name="LandlineNo" ColumnName="LandlineNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="SkypeID" ColumnName="SkypeID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ClientPM">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_ClientPM">
+              <MappingFragment StoreEntitySet="TBL_ClientPM">
+                <ScalarProperty Name="ClientPMID" ColumnName="ClientPMID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AlternateEmail" ColumnName="AlternateEmail" />
+                <ScalarProperty Name="LandlineNo" ColumnName="LandlineNo" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="SkypeID" ColumnName="SkypeID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_City">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_City">
+              <MappingFragment StoreEntitySet="TBL_M_City">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Country">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Country">
+              <MappingFragment StoreEntitySet="TBL_M_Country">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Currency">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Currency">
+              <MappingFragment StoreEntitySet="TBL_M_Currency">
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_DeliverStatus">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_DeliverStatus">
+              <MappingFragment StoreEntitySet="TBL_M_DeliverStatus">
+                <ScalarProperty Name="DeliverStatusID" ColumnName="DeliverStatusID" />
+                <ScalarProperty Name="DeliverStatus" ColumnName="DeliverStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Designation">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Designation">
+              <MappingFragment StoreEntitySet="TBL_M_Designation">
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Domain">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Domain">
+              <MappingFragment StoreEntitySet="TBL_M_Domain">
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="Staus" ColumnName="Staus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Expertise">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Expertise">
+              <MappingFragment StoreEntitySet="TBL_M_Expertise">
+                <ScalarProperty Name="ExpertiseID" ColumnName="ExpertiseID" />
+                <ScalarProperty Name="Expertise" ColumnName="Expertise" />
+                <ScalarProperty Name="Staus" ColumnName="Staus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Language">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Language">
+              <MappingFragment StoreEntitySet="TBL_M_Language">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_ModeOfPayment">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_ModeOfPayment">
+              <MappingFragment StoreEntitySet="TBL_M_ModeOfPayment">
+                <ScalarProperty Name="ModeOfPaymentID" ColumnName="ModeOfPaymentID" />
+                <ScalarProperty Name="ModeOfPayment" ColumnName="ModeOfPayment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_OnTimeDeliverStatus">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_OnTimeDeliverStatus">
+              <MappingFragment StoreEntitySet="TBL_M_OnTimeDeliverStatus">
+                <ScalarProperty Name="OnTimeDeliverStatusID" ColumnName="OnTimeDeliverStatusID" />
+                <ScalarProperty Name="OnTimeDeliverStatus" ColumnName="OnTimeDeliverStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_ProcessStatus">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_ProcessStatus">
+              <MappingFragment StoreEntitySet="TBL_M_ProcessStatus">
+                <ScalarProperty Name="ProcessStatusID" ColumnName="ProcessStatusID" />
+                <ScalarProperty Name="ProcessStatus" ColumnName="ProcessStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Role">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Role">
+              <MappingFragment StoreEntitySet="TBL_M_Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Services">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Services">
+              <MappingFragment StoreEntitySet="TBL_M_Services">
+                <ScalarProperty Name="ServicesID" ColumnName="ServicesID" />
+                <ScalarProperty Name="Services" ColumnName="Services" />
+                <ScalarProperty Name="Staus" ColumnName="Staus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Software">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Software">
+              <MappingFragment StoreEntitySet="TBL_M_Software">
+                <ScalarProperty Name="SoftwareID" ColumnName="SoftwareID" />
+                <ScalarProperty Name="Software" ColumnName="Software" />
+                <ScalarProperty Name="Staus" ColumnName="Staus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_State">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_State">
+              <MappingFragment StoreEntitySet="TBL_M_State">
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_TaskType">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_TaskType">
+              <MappingFragment StoreEntitySet="TBL_M_TaskType">
+                <ScalarProperty Name="TaskTypeID" ColumnName="TaskTypeID" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_Unit">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Unit">
+              <MappingFragment StoreEntitySet="TBL_M_Unit">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Staus" ColumnName="Staus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_M_WorkStatus">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_WorkStatus">
+              <MappingFragment StoreEntitySet="TBL_M_WorkStatus">
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Project">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_Project">
+              <MappingFragment StoreEntitySet="TBL_Project">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientPMID" ColumnName="ClientPMID" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ProjectTask">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_ProjectTask">
+              <MappingFragment StoreEntitySet="TBL_ProjectTask">
+                <ScalarProperty Name="ProjectTaskID" ColumnName="ProjectTaskID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="TaskTypeID" ColumnName="TaskTypeID" />
+                <ScalarProperty Name="SourceLanguageID" ColumnName="SourceLanguageID" />
+                <ScalarProperty Name="TargetLanguageID" ColumnName="TargetLanguageID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="RecievedDate" ColumnName="RecievedDate" />
+                <ScalarProperty Name="DeadlineDate" ColumnName="DeadlineDate" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="ProcessStatusID" ColumnName="ProcessStatusID" />
+                <ScalarProperty Name="DeliverStatusID" ColumnName="DeliverStatusID" />
+                <ScalarProperty Name="OnTimeDeliverStatusID" ColumnName="OnTimeDeliverStatusID" />
+                <ScalarProperty Name="EndRemarks" ColumnName="EndRemarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_TrackerPC">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_TrackerPC">
+              <MappingFragment StoreEntitySet="TBL_TrackerPC">
+                <ScalarProperty Name="TrackerPCID" ColumnName="TrackerPCID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="HOTimePC" ColumnName="HOTimePC" />
+                <ScalarProperty Name="HBTimePC" ColumnName="HBTimePC" />
+                <ScalarProperty Name="HBRTimePC" ColumnName="HBRTimePC" />
+                <ScalarProperty Name="HBDTimePC" ColumnName="HBDTimePC" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="POID" ColumnName="POID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_TrackerPM">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_TrackerPM">
+              <MappingFragment StoreEntitySet="TBL_TrackerPM">
+                <ScalarProperty Name="TrackerPMID" ColumnName="TrackerPMID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="HOTimePM" ColumnName="HOTimePM" />
+                <ScalarProperty Name="HBTimePM" ColumnName="HBTimePM" />
+                <ScalarProperty Name="HBRTimePM" ColumnName="HBRTimePM" />
+                <ScalarProperty Name="HBDTimePM" ColumnName="HBDTimePM" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_TrackerSPC">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_TrackerSPC">
+              <MappingFragment StoreEntitySet="TBL_TrackerSPC">
+                <ScalarProperty Name="TrackerSPCID" ColumnName="TrackerSPCID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="HOTimeSPC" ColumnName="HOTimeSPC" />
+                <ScalarProperty Name="HBTimeSPC" ColumnName="HBTimeSPC" />
+                <ScalarProperty Name="HBRTimeSPC" ColumnName="HBRTimeSPC" />
+                <ScalarProperty Name="HBDTimeSPC" ColumnName="HBDTimeSPC" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="POID" ColumnName="POID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_VenderSoftware">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_VenderSoftware">
+              <MappingFragment StoreEntitySet="TBL_VenderSoftware">
+                <ScalarProperty Name="VenderSoftwareID" ColumnName="VenderSoftwareID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="SoftwareID" ColumnName="SoftwareID" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="ExpertiseID" ColumnName="ExpertiseID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Vendor">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_Vendor">
+              <MappingFragment StoreEntitySet="TBL_Vendor">
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="DateOfAniversary" ColumnName="DateOfAniversary" />
+                <ScalarProperty Name="NativeLanguage" ColumnName="NativeLanguage" />
+                <ScalarProperty Name="AcademicQualification" ColumnName="AcademicQualification" />
+                <ScalarProperty Name="ProfessionalQualification" ColumnName="ProfessionalQualification" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="AlternateEmailID" ColumnName="AlternateEmailID" />
+                <ScalarProperty Name="SkypeID" ColumnName="SkypeID" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="AlternateNumber" ColumnName="AlternateNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="HouseNo_StreetNo" ColumnName="HouseNo/StreetNo" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="WorkingTime" ColumnName="WorkingTime" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="HDD" ColumnName="HDD" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="MSOffice" ColumnName="MSOffice" />
+                <ScalarProperty Name="AnyOtherExprience" ColumnName="AnyOtherExprience" />
+                <ScalarProperty Name="TypeofConnection" ColumnName="TypeofConnection" />
+                <ScalarProperty Name="InternetAvailabilityPerDay" ColumnName="InternetAvailabilityPerDay" />
+                <ScalarProperty Name="InternetServiceProvider" ColumnName="InternetServiceProvider" />
+                <ScalarProperty Name="InternetDownTimePerDay" ColumnName="InternetDownTimePerDay" />
+                <ScalarProperty Name="ElectricityDownTimePerDay" ColumnName="ElectricityDownTimePerDay" />
+                <ScalarProperty Name="AccountHolderName" ColumnName="AccountHolderName" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankAddress" ColumnName="BankAddress" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="PanNumber" ColumnName="PanNumber" />
+                <ScalarProperty Name="IBANCode" ColumnName="IBANCode" />
+                <ScalarProperty Name="SWIFTCode" ColumnName="SWIFTCode" />
+                <ScalarProperty Name="MoneyBookerID" ColumnName="MoneyBookerID" />
+                <ScalarProperty Name="PayPalID" ColumnName="PayPalID" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="RegisteredBy" ColumnName="RegisteredBy" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="UploadPhoto" ColumnName="UploadPhoto" />
+                <ScalarProperty Name="UploadPersonalID" ColumnName="UploadPersonalID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_VendorLanguagePair">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_VendorLanguagePair">
+              <MappingFragment StoreEntitySet="TBL_VendorLanguagePair">
+                <ScalarProperty Name="VendorLanguagePairID" ColumnName="VendorLanguagePairID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="SourceLanguageID" ColumnName="SourceLanguageID" />
+                <ScalarProperty Name="TargetLanguageID" ColumnName="TargetLanguageID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_VendorService">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_VendorService">
+              <MappingFragment StoreEntitySet="TBL_VendorService">
+                <ScalarProperty Name="VendorServiceID" ColumnName="VendorServiceID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="QuotedCurrencyID" ColumnName="QuotedCurrencyID" />
+                <ScalarProperty Name="QuotedRate" ColumnName="QuotedRate" />
+                <ScalarProperty Name="FreezedCurrenyID" ColumnName="FreezedCurrenyID" />
+                <ScalarProperty Name="FreezedRate" ColumnName="FreezedRate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
