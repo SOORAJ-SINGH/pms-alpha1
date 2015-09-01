@@ -29,6 +29,10 @@ namespace pms_alpha1.Controllers
         public ActionResult Create()
         {
 
+            VendorRegistration vendorRegister = new VendorRegistration();
+            var ven = from v in unitOfWork.VendorRepository.Get() select v;
+            
+            //logic for drop down list Domains
             //improve this code ....to directly get the data in the list Format
             var domainList = from domain in unitOfWork.DomainRepository.Get() select domain;
             var domainL = new List<cDomain>();
@@ -40,16 +44,65 @@ namespace pms_alpha1.Controllers
                 }
             }
 
-
             IEnumerable<cDomain> _Domain_IE = domainL as IEnumerable<cDomain>;
             
-            
-            VendorRegistration vendorRegister = new VendorRegistration();
-            var ven = from v in unitOfWork.VendorRepository.Get() select v;
             //Func<cDomain, string> text = (d) => string.Format() "Domain";
             vendorRegister.DomainItems = ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain,x =>x.DomainID.ToString());
 
+
+
+
+
            
+            //logic for drop down list Country
+            //improve this code ....to directly get the data in the list Format
+            var countryList = from country in unitOfWork.CountryRepository.Get() select country;
+            var countryL = new List<cCountry>();
+            if (countryList.Any())
+            {
+                foreach (var d in countryList)
+                {
+                    countryL.Add(new cCountry() { CountryID = d.CountryID, Country = d.Country });
+                }
+            }
+
+            IEnumerable<cCountry> _Country_IE = countryL as IEnumerable<cCountry>;
+            vendorRegister.CountryItems = ExtensionClass.ToSelectListItems<cCountry>(countryL, x => x.Country, x => x.CountryID.ToString());
+
+
+
+            //logic for drop down list State
+            //improve this code ....to directly get the data in the list Format
+            var stateList = from state in unitOfWork.StateRepository.Get() select state;
+            var stateL = new List<cState>();
+            if (stateList.Any())
+            {
+                foreach (var d in stateList)
+                {
+                    stateL.Add(new cState() { StateID = d.StateID, State = d.State });
+                }
+            }
+
+            IEnumerable<cState> _State_IE = stateL as IEnumerable<cState>;
+            vendorRegister.StateItems = ExtensionClass.ToSelectListItems<cState>(stateL, x => x.State, x => x.StateID.ToString());
+
+
+            //logic for drop down list City
+            //improve this code ....to directly get the data in the list Format
+            var cityList = from city in unitOfWork.CityRepository.Get() select city;
+            var cityL = new List<cCity>();
+            if (cityList.Any())
+            {
+                foreach (var d in cityList)
+                {
+                    cityL.Add(new cCity() { CityID = d.CityID, City = d.City });
+                }
+            }
+
+            IEnumerable<cCity> _City_IE = cityL as IEnumerable<cCity>;
+            vendorRegister.CityItems = ExtensionClass.ToSelectListItems<cCity>(cityL, x => x.City, x => x.CityID.ToString());
+
+
             //ViewBag.DomainID = new SelectList(_Domain_IE, "DomainID", "Domain");
             //ViewBag.StateID = new SelectList(db.TBL_M_State, "StateID", "State");
             //ViewBag.CityID = new SelectList(db.TBL_M_City, "CityID", "City");
@@ -71,7 +124,15 @@ namespace pms_alpha1.Controllers
         {
             try
             {
-
+                if (ModelState.IsValid)
+                {
+                    
+                }
+                else
+                {
+                    bool hasErrors = ViewData.ModelState.Values.Any(x => x.Errors.Count > 1);
+                    var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                }
                 //create mapping
                 Mapper.CreateMap<VendorRegistration, TBL_Vendor>();
 
@@ -96,6 +157,16 @@ namespace pms_alpha1.Controllers
     public static class ExtensionClass
     {
         
+        //public static IEnumerable<T> ToEnum(var list)
+        //{
+        //     IEnumerable<cCountry> _IE;
+        //     return _IE;
+        //}
+
+
+
+
+
 
         /// <summary>
         /// To convert any the List<T> or IEnumerable<T> to the IEnumerable<selectlistItem>

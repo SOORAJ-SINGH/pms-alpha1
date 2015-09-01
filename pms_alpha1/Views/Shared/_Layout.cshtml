@@ -131,13 +131,15 @@
 
                     <ul class="current">
                         <li>
-                            <a href="#nogo"><b>Products</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                           
+                            <a href="@Url.Action("Index","Vendor")"><b>Vendor</b><!--[if IE 7]><!--></a>
+                            <!--<![endif]-->
                             <!--[if lte IE 6]><table><tr><td><![endif]-->
                             <div class="select_sub show">
                                 <ul class="sub">
-                                    <li><a href="#nogo">View all products</a></li>
-                                    <li class="sub_show"><a href="#nogo">Add product</a></li>
-                                    <li><a href="#nogo">Delete products</a></li>
+                                    <li>@Html.ActionLink("View all Vendors", "View", "Vendor")</li>
+                                    <li class="sub_show">@Html.ActionLink("Add Vendor", "Create", "Vendor")</li>
+                                    <li>@Html.ActionLink("Delete Vendor", "Delete", "Vendor")</li>
                                 </ul>
                             </div>
                             <!--[if lte IE 6]></td></tr></table></a><![endif]-->

@@ -51,7 +51,7 @@ namespace pms_alpha1.ViewModels
         public Nullable<int> CityID { get; set; }
         [Display(Name = "State")]
         public Nullable<int> StateID { get; set; }
-        [Display(Name = "CountryID")]
+        [Display(Name = "Country")]
         public Nullable<int> CountryID { get; set; }
         [Display(Name = "Pin Code")]
         public string PinCode { get; set; }
@@ -125,6 +125,9 @@ namespace pms_alpha1.ViewModels
         //}
 
         public IEnumerable<SelectListItem> DomainItems {get;set;}
+        public IEnumerable<SelectListItem> CountryItems { get; set; }
+        public IEnumerable<SelectListItem> StateItems { get; set; }
+        public IEnumerable<SelectListItem> CityItems { get; set; }
 
 
         public virtual ICollection<VenderSoftware> VenderSoftware { get; set; }
@@ -138,7 +141,7 @@ namespace pms_alpha1.ViewModels
 
     public class cCity
     {
-       
+        [Display(Name = "City")]
         public int CityID { get; set; }
         public int StateID { get; set; }
         public string City { get; set; }
@@ -149,6 +152,7 @@ namespace pms_alpha1.ViewModels
 
     public class cState
     {
+        [Display(Name = "State")]
         public int StateID { get; set; }
         public int CountryID { get; set; }
         public string State { get; set; }
@@ -157,6 +161,7 @@ namespace pms_alpha1.ViewModels
 
     public class cCountry
     {
+        [Display(Name = "Country")]
         public int CountryID { get; set; }
         public string Country { get; set; }
         public bool Status { get; set; }

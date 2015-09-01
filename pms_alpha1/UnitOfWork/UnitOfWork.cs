@@ -12,8 +12,12 @@ namespace pms_alpha1.UnitOfWork
         private somyatrans_pmsDBContext dbContext = new somyatrans_pmsDBContext();
         private GenericRepository<TBL_Vendor> vendorRepository;
         private GenericRepository<TBL_M_Domain> domainRepository;
+        private GenericRepository<TBL_M_Country> countryRepository;
+        private GenericRepository<TBL_M_State> stateRepository;
+        private GenericRepository<TBL_M_City> cityRepository;
 
-        //create cusotm Models and change here with the Tbl_Vendor
+
+        //create custom Models and change here with the Tbl_Vendor
         public GenericRepository<TBL_Vendor> VendorRepository
         { 
             get
@@ -37,6 +41,46 @@ namespace pms_alpha1.UnitOfWork
                     
                 }
                 return domainRepository;
+            }
+        }
+        public GenericRepository<TBL_M_Country> CountryRepository
+        {
+            get
+            {
+                if (this.countryRepository == null)
+                {
+                    this.countryRepository = new GenericRepository<TBL_M_Country>(dbContext);
+
+                }
+                return countryRepository;
+            }
+        }
+
+
+        public GenericRepository<TBL_M_State> StateRepository
+        {
+            get
+            {
+                if (this.stateRepository == null)
+                {
+                    this.stateRepository = new GenericRepository<TBL_M_State>(dbContext);
+
+                }
+                return stateRepository;
+            }
+        }
+
+
+        public GenericRepository<TBL_M_City> CityRepository
+        {
+            get
+            {
+                if (this.cityRepository == null)
+                {
+                    this.cityRepository = new GenericRepository<TBL_M_City>(dbContext);
+
+                }
+                return cityRepository;
             }
         }
 
