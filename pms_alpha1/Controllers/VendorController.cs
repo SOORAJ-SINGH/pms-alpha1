@@ -76,8 +76,11 @@ namespace pms_alpha1.Controllers
                 Mapper.CreateMap<VendorRegistration, TBL_Vendor>();
 
                 TBL_Vendor tbl_Vendor = Mapper.Map<VendorRegistration, TBL_Vendor>(vendorRegister);
+                unitOfWork.VendorRepository.Insert(tbl_Vendor);
+                
+                unitOfWork.Save();
 
-                return View();
+                return RedirectToAction("Index");
 
 
             }

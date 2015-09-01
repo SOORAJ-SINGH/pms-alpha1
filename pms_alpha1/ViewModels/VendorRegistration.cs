@@ -20,6 +20,8 @@ namespace pms_alpha1.ViewModels
         [Required]
         public string Vendor { get; set; }
         [Display(Name = "Date Of Birth")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Text)]
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         [Display(Name = "Date Of Anniversary")]
         public Nullable<System.DateTime> DateOfAniversary { get; set; }
@@ -35,8 +37,12 @@ namespace pms_alpha1.ViewModels
         public string AlternateEmailID { get; set; }
         public string SkypeID { get; set; }
         [Display(Name = "Contact Number")]
+        [StringLength(10,ErrorMessage = "Number cannot have digits above 10 digits")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public string ContactNumber { get; set; }
         [Display(Name = "Alternate Number")]
+        [StringLength(10, ErrorMessage = "Number cannot have digits above 10 digits")]
+       [Range(0, int.MaxValue, ErrorMessage = "Please enter valid Number")]
         public string AlternateNumber { get; set; }
         public string Address { get; set; }
         [Display(Name = "HouseNo/StreetNo")]
