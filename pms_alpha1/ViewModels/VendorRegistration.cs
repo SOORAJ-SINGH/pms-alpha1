@@ -131,6 +131,7 @@ namespace pms_alpha1.ViewModels
 
 
         public virtual ICollection<VenderSoftware> VenderSoftware { get; set; }
+        //public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
         public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
         public virtual ICollection<VendorService> VendorService { get; set; }
 
@@ -188,7 +189,9 @@ namespace pms_alpha1.ViewModels
         public long VendorLanguagePairID { get; set; }
         public Nullable<int> VendorID { get; set; }
         public Nullable<int> SourceLanguageID { get; set; }
+        public string SourceLanguage { get; set; }
         public Nullable<int> TargetLanguageID { get; set; }
+        public string TargetLanguage { get; set; }
         public Nullable<bool> Status { get; set; }
     }
 

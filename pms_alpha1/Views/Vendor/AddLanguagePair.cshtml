@@ -1,0 +1,12 @@
+﻿@using pms_alpha1.Helpers
+@model pms_alpha1.ViewModels.VendorLanguagePair
+
+<div class="AddLanguagePairRow">
+    @using (Html.BeginCollectionItem("vendorLanguagePair"))
+    {
+        <b>Source Language:</b>   @Html.TextBoxFor(x => x.SourceLanguageID);
+        <b>Target Language:</b>  @Html.TextBoxFor(x => x.TargetLanguageID);
+        <a href="#" class="deleteRow">delete</a>
+    }
+
+</div>

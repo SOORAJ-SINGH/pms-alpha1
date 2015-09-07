@@ -102,6 +102,17 @@ namespace pms_alpha1.Controllers
             IEnumerable<cCity> _City_IE = cityL as IEnumerable<cCity>;
             vendorRegister.CityItems = ExtensionClass.ToSelectListItems<cCity>(cityL, x => x.City, x => x.CityID.ToString());
 
+            //vendorRegister.VendorLanguagePair = new[] {
+            //    new VendorLanguagePair{ VendorLanguagePairID = 0,TargetLanguageID = 0}
+            //};
+            
+            //creating the list of blank language pair..to be displayed as default
+            List<VendorLanguagePair> LanguagePair = new List<VendorLanguagePair> { 
+                                                        new VendorLanguagePair {SourceLanguageID = 0,TargetLanguageID=0}                   
+                                                    };
+
+            vendorRegister.VendorLanguagePair = LanguagePair;
+            //vendorRegister.VendorLanguagePair = new HashSet<VendorLanguagePair>();
 
             //ViewBag.DomainID = new SelectList(_Domain_IE, "DomainID", "Domain");
             //ViewBag.StateID = new SelectList(db.TBL_M_State, "StateID", "State");
@@ -111,7 +122,11 @@ namespace pms_alpha1.Controllers
             return View(vendorRegister);
         }
 
-        
+        //Add langugae pair dynamically 
+        public ActionResult AddLanguagePair()
+        {
+            return PartialView("AddLanguagePair", new VendorLanguagePair());
+        }
 
         
         /// <summary>
