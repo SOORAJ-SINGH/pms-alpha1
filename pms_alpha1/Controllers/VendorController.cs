@@ -16,7 +16,7 @@ namespace pms_alpha1.Controllers
 
 
         #endregion
-        
+
         public ActionResult Index()
         {
             return View();
@@ -31,7 +31,7 @@ namespace pms_alpha1.Controllers
 
             VendorRegistration vendorRegister = new VendorRegistration();
             var ven = from v in unitOfWork.VendorRepository.Get() select v;
-            
+
             //logic for drop down list Domains
             //improve this code ....to directly get the data in the list Format
             var domainList = from domain in unitOfWork.DomainRepository.Get() select domain;
@@ -45,15 +45,15 @@ namespace pms_alpha1.Controllers
             }
 
             IEnumerable<cDomain> _Domain_IE = domainL as IEnumerable<cDomain>;
-            
+
             //Func<cDomain, string> text = (d) => string.Format() "Domain";
-            vendorRegister.DomainItems = ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain,x =>x.DomainID.ToString());
+            vendorRegister.DomainItems = ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain, x => x.DomainID.ToString());
 
 
 
 
 
-           
+
             //logic for drop down list Country
             //improve this code ....to directly get the data in the list Format
             var countryList = from country in unitOfWork.CountryRepository.Get() select country;
@@ -102,16 +102,39 @@ namespace pms_alpha1.Controllers
             IEnumerable<cCity> _City_IE = cityL as IEnumerable<cCity>;
             vendorRegister.CityItems = ExtensionClass.ToSelectListItems<cCity>(cityL, x => x.City, x => x.CityID.ToString());
 
-            //vendorRegister.VendorLanguagePair = new[] {
-            //    new VendorLanguagePair{ VendorLanguagePairID = 0,TargetLanguageID = 0}
-            //};
-            
+
+
+            //logic for drop down list Language
+            //improve this code ....to directly get the data in the list Format
+            var languageList = from language in unitOfWork.LanguageRepository.Get() select language;
+
+            var languageSourceL = new List<VendorLanguagePair>();
+            var languageTargetL = new List<VendorLanguagePair>();
+
+            if (languageList.Any())
+            {
+                foreach (var d in languageList)
+                {
+                    languageSourceL.Add(new VendorLanguagePair() { SourceLanguageID = d.LanguageID, SourceLanguage = d.Language });
+                    languageTargetL.Add(new VendorLanguagePair() { TargetLanguageID = d.LanguageID, TargetLanguage = d.Language });
+                }
+            }
+
+
             //creating the list of blank language pair..to be displayed as default
             List<VendorLanguagePair> LanguagePair = new List<VendorLanguagePair> { 
-                                                        new VendorLanguagePair {SourceLanguageID = 0,TargetLanguageID=0}                   
+                                                        new VendorLanguagePair {
+                                                            SourceLanguageID = 0,
+                                                            TargetLanguageID=0,
+                                                            LanguageSourceItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageSourceL, x => x.SourceLanguage, x => x.SourceLanguageID.ToString()),
+                                                            LanguageTargetItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageTargetL, x => x.TargetLanguage, x => x.TargetLanguageID.ToString()),
+
+                                                        }                   
                                                     };
 
             vendorRegister.VendorLanguagePair = LanguagePair;
+
+
             //vendorRegister.VendorLanguagePair = new HashSet<VendorLanguagePair>();
 
             //ViewBag.DomainID = new SelectList(_Domain_IE, "DomainID", "Domain");
@@ -122,13 +145,45 @@ namespace pms_alpha1.Controllers
             return View(vendorRegister);
         }
 
-        //Add langugae pair dynamically 
+        //Add language pair dynamically 
         public ActionResult AddLanguagePair()
         {
-            return PartialView("AddLanguagePair", new VendorLanguagePair());
+
+
+            //Repeation code//////////////////////////////////////
+            //logic for drop down list Language
+            //improve this code ....to directly get the data in the list Format
+            var languageList = from language in unitOfWork.LanguageRepository.Get() select language;
+
+            var languageSourceL = new List<VendorLanguagePair>();
+            var languageTargetL = new List<VendorLanguagePair>();
+
+            if (languageList.Any())
+            {
+                foreach (var d in languageList)
+                {
+                    languageSourceL.Add(new VendorLanguagePair() { SourceLanguageID = d.LanguageID, SourceLanguage = d.Language });
+                    languageTargetL.Add(new VendorLanguagePair() { TargetLanguageID = d.LanguageID, TargetLanguage = d.Language });
+                }
+            }
+
+
+            //creating the list of blank language pair..to be displayed as default
+            VendorLanguagePair LanguagePair =
+                                                        new VendorLanguagePair
+                                                        {
+                                                            SourceLanguageID = 0,
+                                                            TargetLanguageID = 0,
+                                                            LanguageSourceItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageSourceL, x => x.SourceLanguage, x => x.SourceLanguageID.ToString()),
+                                                            LanguageTargetItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageTargetL, x => x.TargetLanguage, x => x.TargetLanguageID.ToString()),
+
+
+                                                        };
+
+            return PartialView("AddLanguagePair", LanguagePair);
         }
 
-        
+
         /// <summary>
         /// Post Action for Create
         /// </summary>
@@ -141,7 +196,7 @@ namespace pms_alpha1.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
+
                 }
                 else
                 {
@@ -153,7 +208,7 @@ namespace pms_alpha1.Controllers
 
                 TBL_Vendor tbl_Vendor = Mapper.Map<VendorRegistration, TBL_Vendor>(vendorRegister);
                 unitOfWork.VendorRepository.Insert(tbl_Vendor);
-                
+
                 unitOfWork.Save();
 
                 return RedirectToAction("Index");
@@ -171,7 +226,7 @@ namespace pms_alpha1.Controllers
 
     public static class ExtensionClass
     {
-        
+
         //public static IEnumerable<T> ToEnum(var list)
         //{
         //     IEnumerable<cCountry> _IE;
@@ -193,7 +248,7 @@ namespace pms_alpha1.Controllers
         /// <returns></returns>
         public static IEnumerable<SelectListItem> ToSelectListItems<T>(
             this IEnumerable<T> source,
-            Func<T, string> textPropertySelector, 
+            Func<T, string> textPropertySelector,
             Func<T, string> valuePropertySelector
             )
         {
@@ -204,7 +259,7 @@ namespace pms_alpha1.Controllers
                     Value = valuePropertySelector(obj),
                     //Selected = isSelectedSelector(obj)
                 });
-                
+
         }
 
 
@@ -227,6 +282,19 @@ namespace pms_alpha1.Controllers
                               Value = s.DomainID.ToString()
                           });
         }
+
+        //public static List<T> LanguageList(List languageList)
+        //{
+        //    var languageL = new List<cLanguage>();
+        //    if (languageList.Any())
+        //    {
+        //        foreach (var d in languageList)
+        //        {
+        //            languageL.Add(new cLanguage() { LanguageID = d.LanguageID, Language = d.Language });
+        //        }
+        //    }
+        //    return languageL;
+        //}
 
     }
 }

@@ -130,6 +130,8 @@ namespace pms_alpha1.ViewModels
         public IEnumerable<SelectListItem> CityItems { get; set; }
 
 
+
+
         public virtual ICollection<VenderSoftware> VenderSoftware { get; set; }
         //public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
         public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
@@ -174,6 +176,14 @@ namespace pms_alpha1.ViewModels
         public string Domain { get; set; }
         public bool Staus { get; set; }
     }
+
+    public class cLanguage
+    {
+        public int LanguageID { get; set; }
+        public string Language { get; set; }
+        public bool Staus { get; set; }
+    }
+
     public class VenderSoftware
     {
         public long VenderSoftwareID { get; set; }
@@ -193,6 +203,10 @@ namespace pms_alpha1.ViewModels
         public Nullable<int> TargetLanguageID { get; set; }
         public string TargetLanguage { get; set; }
         public Nullable<bool> Status { get; set; }
+        public Nullable<int> LanguageID { get; set; }
+        public IEnumerable<SelectListItem> LanguageSourceItems { get; set; }
+        public IEnumerable<SelectListItem> LanguageTargetItems { get; set; }
+
     }
 
     public class VendorService

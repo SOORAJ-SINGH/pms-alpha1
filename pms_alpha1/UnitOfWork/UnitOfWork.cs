@@ -16,6 +16,9 @@ namespace pms_alpha1.UnitOfWork
         private GenericRepository<TBL_M_State> stateRepository;
         private GenericRepository<TBL_M_City> cityRepository;
 
+        private GenericRepository<TBL_M_Language> languageRepository;
+
+
 
         //create custom Models and change here with the Tbl_Vendor
         public GenericRepository<TBL_Vendor> VendorRepository
@@ -84,6 +87,18 @@ namespace pms_alpha1.UnitOfWork
             }
         }
 
+        public GenericRepository<TBL_M_Language> LanguageRepository
+        {
+            get
+            {
+                if (this.languageRepository == null)
+                {
+                    this.languageRepository = new GenericRepository<TBL_M_Language>(dbContext);
+
+                }
+                return languageRepository;
+            }
+        }
         public void Save()
         {
             dbContext.SaveChanges();
