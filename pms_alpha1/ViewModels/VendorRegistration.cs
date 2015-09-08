@@ -124,6 +124,8 @@ namespace pms_alpha1.ViewModels
         //    get { return _cDomain; }
         //}
 
+
+        //To Display the DropDownList 
         public IEnumerable<SelectListItem> DomainItems {get;set;}
         public IEnumerable<SelectListItem> CountryItems { get; set; }
         public IEnumerable<SelectListItem> StateItems { get; set; }
@@ -189,9 +191,13 @@ namespace pms_alpha1.ViewModels
         public long VenderSoftwareID { get; set; }
         public Nullable<int> VendorID { get; set; }
         public Nullable<int> SoftwareID { get; set; }
+        public string Software { get; set; }
         public string Version { get; set; }
         public Nullable<int> ExpertiseID { get; set; }
         public Nullable<bool> Status { get; set; }
+        public IEnumerable<SelectListItem> SoftwaresItems { get; set; }
+        public IEnumerable<SelectListItem> ExpertiseItems { get; set; }
+
     }
 
     public class VendorLanguagePair
@@ -215,10 +221,17 @@ namespace pms_alpha1.ViewModels
         public Nullable<int> VendorID { get; set; }
         public Nullable<int> ServiceID { get; set; }
         public Nullable<int> QuotedCurrencyID { get; set; }
+        public string QuotedCurrency { get; set; }
         public Nullable<decimal> QuotedRate { get; set; }
         public Nullable<int> FreezedCurrenyID { get; set; }
+        public string FreezedCurreny { get; set; }
         public Nullable<decimal> FreezedRate { get; set; }
         public Nullable<bool> Status { get; set; }
+
+        public IEnumerable<SelectListItem> ServicesItems { get; set; }
+        public IEnumerable<SelectListItem> QuotedCurrencyItems { get; set; }
+        public IEnumerable<SelectListItem> FreezedCurrencyItems { get; set; }
+
     }
 
 }

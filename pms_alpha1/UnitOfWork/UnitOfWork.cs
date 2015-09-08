@@ -17,7 +17,10 @@ namespace pms_alpha1.UnitOfWork
         private GenericRepository<TBL_M_City> cityRepository;
 
         private GenericRepository<TBL_M_Language> languageRepository;
-
+        private GenericRepository<TBL_M_Software> vendorSoftwareRepository;
+        private GenericRepository<TBL_M_Expertise> vendorExpertiseRepository;
+        private GenericRepository<TBL_M_Currency> currencyRepository;
+        private GenericRepository<TBL_M_Services> servicesRepository;
 
 
         //create custom Models and change here with the Tbl_Vendor
@@ -58,8 +61,6 @@ namespace pms_alpha1.UnitOfWork
                 return countryRepository;
             }
         }
-
-
         public GenericRepository<TBL_M_State> StateRepository
         {
             get
@@ -72,8 +73,6 @@ namespace pms_alpha1.UnitOfWork
                 return stateRepository;
             }
         }
-
-
         public GenericRepository<TBL_M_City> CityRepository
         {
             get
@@ -99,6 +98,56 @@ namespace pms_alpha1.UnitOfWork
                 return languageRepository;
             }
         }
+        public GenericRepository<TBL_M_Software> VendorSoftwareRepository
+        {
+            get
+            {
+                if (this.vendorSoftwareRepository == null)
+                {
+                    this.vendorSoftwareRepository = new GenericRepository<TBL_M_Software>(dbContext);
+
+                }
+                return vendorSoftwareRepository;
+            }
+        }
+        public GenericRepository<TBL_M_Expertise> VendorExpertiseRepository
+        {
+            get
+            {
+                if (this.vendorExpertiseRepository == null)
+                {
+                    this.vendorExpertiseRepository = new GenericRepository<TBL_M_Expertise>(dbContext);
+
+                }
+                return vendorExpertiseRepository;
+            }
+        }
+        public GenericRepository<TBL_M_Currency> CurrencyRepository
+        {
+            get
+            {
+                if (this.currencyRepository == null)
+                {
+                    this.currencyRepository = new GenericRepository<TBL_M_Currency>(dbContext);
+
+                }
+                return currencyRepository;
+            }
+        }
+        public GenericRepository<TBL_M_Services> ServicesRepository
+        {
+            get
+            {
+                if (this.servicesRepository == null)
+                {
+                    this.servicesRepository = new GenericRepository<TBL_M_Services>(dbContext);
+
+                }
+                return servicesRepository;
+            }
+        }
+
+
         public void Save()
         {
             dbContext.SaveChanges();

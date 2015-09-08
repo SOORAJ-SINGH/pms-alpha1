@@ -425,8 +425,38 @@
 
                 @Html.Partial("AddLanguagePair", item)
             }
+            @Html.ActionLink("Add", "AddLanguagePair", null, new { id = "addLanguagePairItem" })
         </div>
-        @Html.ActionLink("Add", "AddLanguagePair", null, new { id = "addItem" })
+       
+
+        <br />
+        <br />
+
+
+        <div id="AddVenderSoftwares">
+            <h2>Vendor Softwares</h2>
+            @foreach (var item in Model.VenderSoftware)
+            {
+
+                @Html.Partial("AddVenderSoftwares", item)
+            }
+            @Html.ActionLink("Add", "AddVenderSoftwares", null, new { id = "addVenderSoftwaresItem" })
+        </div>
+
+
+        <br />
+        <br />
+
+        <div id="AddVendorServices">
+            <h2>Vendor Services</h2>
+            @foreach (var item in Model.VendorService)
+            {
+
+                @Html.Partial("AddVendorServices", item)
+            }
+            @Html.ActionLink("Add", "AddVendorServices", null, new { id = "addVendorServicesItem" })
+        </div>
+
 
         <br />
         <br />

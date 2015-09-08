@@ -32,6 +32,7 @@ namespace pms_alpha1.Controllers
             VendorRegistration vendorRegister = new VendorRegistration();
             var ven = from v in unitOfWork.VendorRepository.Get() select v;
 
+            #region logic for drop down list Domains
             //logic for drop down list Domains
             //improve this code ....to directly get the data in the list Format
             var domainList = from domain in unitOfWork.DomainRepository.Get() select domain;
@@ -46,14 +47,11 @@ namespace pms_alpha1.Controllers
 
             IEnumerable<cDomain> _Domain_IE = domainL as IEnumerable<cDomain>;
 
-            //Func<cDomain, string> text = (d) => string.Format() "Domain";
+            #endregion
             vendorRegister.DomainItems = ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain, x => x.DomainID.ToString());
 
 
-
-
-
-
+            #region logic for drop down list Country
             //logic for drop down list Country
             //improve this code ....to directly get the data in the list Format
             var countryList = from country in unitOfWork.CountryRepository.Get() select country;
@@ -67,10 +65,11 @@ namespace pms_alpha1.Controllers
             }
 
             IEnumerable<cCountry> _Country_IE = countryL as IEnumerable<cCountry>;
+            #endregion
             vendorRegister.CountryItems = ExtensionClass.ToSelectListItems<cCountry>(countryL, x => x.Country, x => x.CountryID.ToString());
 
 
-
+            #region logic for drop down list State
             //logic for drop down list State
             //improve this code ....to directly get the data in the list Format
             var stateList = from state in unitOfWork.StateRepository.Get() select state;
@@ -84,9 +83,11 @@ namespace pms_alpha1.Controllers
             }
 
             IEnumerable<cState> _State_IE = stateL as IEnumerable<cState>;
+            #endregion
             vendorRegister.StateItems = ExtensionClass.ToSelectListItems<cState>(stateL, x => x.State, x => x.StateID.ToString());
 
 
+            #region logic for drop down list City
             //logic for drop down list City
             //improve this code ....to directly get the data in the list Format
             var cityList = from city in unitOfWork.CityRepository.Get() select city;
@@ -100,39 +101,31 @@ namespace pms_alpha1.Controllers
             }
 
             IEnumerable<cCity> _City_IE = cityL as IEnumerable<cCity>;
+
+            #endregion
             vendorRegister.CityItems = ExtensionClass.ToSelectListItems<cCity>(cityL, x => x.City, x => x.CityID.ToString());
 
-
-
-            //logic for drop down list Language
-            //improve this code ....to directly get the data in the list Format
-            var languageList = from language in unitOfWork.LanguageRepository.Get() select language;
-
-            var languageSourceL = new List<VendorLanguagePair>();
-            var languageTargetL = new List<VendorLanguagePair>();
-
-            if (languageList.Any())
-            {
-                foreach (var d in languageList)
-                {
-                    languageSourceL.Add(new VendorLanguagePair() { SourceLanguageID = d.LanguageID, SourceLanguage = d.Language });
-                    languageTargetL.Add(new VendorLanguagePair() { TargetLanguageID = d.LanguageID, TargetLanguage = d.Language });
-                }
-            }
-
-
-            //creating the list of blank language pair..to be displayed as default
-            List<VendorLanguagePair> LanguagePair = new List<VendorLanguagePair> { 
-                                                        new VendorLanguagePair {
-                                                            SourceLanguageID = 0,
-                                                            TargetLanguageID=0,
-                                                            LanguageSourceItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageSourceL, x => x.SourceLanguage, x => x.SourceLanguageID.ToString()),
-                                                            LanguageTargetItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageTargetL, x => x.TargetLanguage, x => x.TargetLanguageID.ToString()),
-
-                                                        }                   
+            List<VendorLanguagePair> LanguagePairList = new List<VendorLanguagePair>{ 
+                                                                ExtensionClass.GetLanguagePair()
                                                     };
+            vendorRegister.VendorLanguagePair = LanguagePairList;
 
-            vendorRegister.VendorLanguagePair = LanguagePair;
+            
+            List<VenderSoftware> SoftwareList = new List<VenderSoftware>{ 
+                                                                ExtensionClass.GetSoftware()
+                                                    };
+            vendorRegister.VenderSoftware = SoftwareList;
+
+
+            List<VendorService> ServicesList = new List<VendorService>{ 
+                                                                ExtensionClass.GetServices()
+                                                    };
+            vendorRegister.VendorService = ServicesList;
+
+
+
+
+
 
 
             //vendorRegister.VendorLanguagePair = new HashSet<VendorLanguagePair>();
@@ -144,45 +137,6 @@ namespace pms_alpha1.Controllers
 
             return View(vendorRegister);
         }
-
-        //Add language pair dynamically 
-        public ActionResult AddLanguagePair()
-        {
-
-
-            //Repeation code//////////////////////////////////////
-            //logic for drop down list Language
-            //improve this code ....to directly get the data in the list Format
-            var languageList = from language in unitOfWork.LanguageRepository.Get() select language;
-
-            var languageSourceL = new List<VendorLanguagePair>();
-            var languageTargetL = new List<VendorLanguagePair>();
-
-            if (languageList.Any())
-            {
-                foreach (var d in languageList)
-                {
-                    languageSourceL.Add(new VendorLanguagePair() { SourceLanguageID = d.LanguageID, SourceLanguage = d.Language });
-                    languageTargetL.Add(new VendorLanguagePair() { TargetLanguageID = d.LanguageID, TargetLanguage = d.Language });
-                }
-            }
-
-
-            //creating the list of blank language pair..to be displayed as default
-            VendorLanguagePair LanguagePair =
-                                                        new VendorLanguagePair
-                                                        {
-                                                            SourceLanguageID = 0,
-                                                            TargetLanguageID = 0,
-                                                            LanguageSourceItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageSourceL, x => x.SourceLanguage, x => x.SourceLanguageID.ToString()),
-                                                            LanguageTargetItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageTargetL, x => x.TargetLanguage, x => x.TargetLanguageID.ToString()),
-
-
-                                                        };
-
-            return PartialView("AddLanguagePair", LanguagePair);
-        }
-
 
         /// <summary>
         /// Post Action for Create
@@ -222,10 +176,162 @@ namespace pms_alpha1.Controllers
             }
 
         }
+
+        //Add language pair dynamically 
+        public ActionResult AddLanguagePair()
+        {
+
+            return PartialView("AddLanguagePair", ExtensionClass.GetLanguagePair());
+        }
+
+        public ActionResult AddVenderSoftwares()
+        {
+
+            return PartialView("AddVenderSoftwares",ExtensionClass.GetSoftware());
+        }
+
+        public ActionResult AddVendorServices()
+        {
+
+            return PartialView("AddVendorServices", ExtensionClass.GetServices());
+        }
+
     }
 
     public static class ExtensionClass
     {
+
+        #region Variables
+        private static UnitOfWork.UnitOfWork unitOfWork = new UnitOfWork.UnitOfWork();
+
+        #endregion
+
+        #region Get Data to be binded for the dropDownList
+        public static VenderSoftware GetSoftware()
+        {
+            //logic for drop down list Softwares Names and Expertise
+            //improve this code ....to directly get the data in the list Format
+            var softwareList = from software in unitOfWork.VendorSoftwareRepository.Get() select software;
+
+            var softwareL = new List<VenderSoftware>();
+
+            if (softwareList.Any())
+            {
+                foreach (var d in softwareList)
+                {
+                    softwareL.Add(new VenderSoftware() { SoftwareID = d.SoftwareID, Software = d.Software });
+                }
+            }
+
+            var expertiseList = from expertise in unitOfWork.VendorExpertiseRepository.Get() select expertise;
+
+            var expertiseL = new List<TBL_M_Expertise>();
+
+            if (expertiseList.Any())
+            {
+                foreach (var d in expertiseList)
+                {
+                    expertiseL.Add(new TBL_M_Expertise() { ExpertiseID = d.ExpertiseID, Expertise = d.Expertise });
+                }
+            }
+            //creating the list of blank software pair..to be displayed as default
+            VenderSoftware venderSoftware = new VenderSoftware
+            {
+                Version = "0",
+                SoftwaresItems = ExtensionClass.ToSelectListItems<VenderSoftware>(softwareL, x => x.Software, x => x.SoftwareID.ToString()),
+                ExpertiseItems = ExtensionClass.ToSelectListItems<TBL_M_Expertise>(expertiseL, x => x.Expertise, x => x.ExpertiseID.ToString()),
+
+
+            };
+            return venderSoftware;
+
+        }
+
+        public static VendorLanguagePair GetLanguagePair()
+        {
+            //logic for drop down list Language
+            //improve this code ....to directly get the data in the list Format
+
+            var languageList = from language in unitOfWork.LanguageRepository.Get() select language;
+
+            var languageSourceL = new List<VendorLanguagePair>();
+            var languageTargetL = new List<VendorLanguagePair>();
+
+            if (languageList.Any())
+            {
+                foreach (var d in languageList)
+                {
+                    languageSourceL.Add(new VendorLanguagePair() { SourceLanguageID = d.LanguageID, SourceLanguage = d.Language });
+                    languageTargetL.Add(new VendorLanguagePair() { TargetLanguageID = d.LanguageID, TargetLanguage = d.Language });
+                }
+            }
+
+
+            VendorLanguagePair LanguagePair = new VendorLanguagePair
+            {
+                SourceLanguageID = 0,
+                TargetLanguageID = 0,
+                LanguageSourceItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageSourceL, x => x.SourceLanguage, x => x.SourceLanguageID.ToString()),
+                LanguageTargetItems = ExtensionClass.ToSelectListItems<VendorLanguagePair>(languageTargetL, x => x.TargetLanguage, x => x.TargetLanguageID.ToString()),
+
+
+            };
+            return LanguagePair;
+
+        }
+
+        public static VendorService GetServices()
+        {
+            //logic for drop down list Language
+            //improve this code ....to directly get the data in the list Format
+
+            var serviceList = from service in unitOfWork.ServicesRepository.Get() select service;
+
+            var serviceL = new List<TBL_M_Services>();
+            
+
+            if (serviceList.Any())
+            {
+                foreach (var d in serviceList)
+                {
+                    serviceL.Add(new TBL_M_Services() { ServicesID = d.ServicesID, Services= d.Services});
+                   
+                }
+            }
+
+            var currencyList = from currency in unitOfWork.CurrencyRepository.Get() select currency;
+
+            var currencyQuotedL = new List<VendorService>();
+            var currencyFreezedL = new List<VendorService>();
+
+            if (currencyList.Any())
+            {
+                foreach (var d in currencyList)
+                {
+                    currencyQuotedL.Add(new VendorService() { QuotedCurrencyID = d.CurrencyID, QuotedCurrency = d.Currency });
+                    currencyFreezedL.Add(new VendorService() { FreezedCurrenyID = d.CurrencyID, FreezedCurreny = d.Currency });
+                }
+            }
+            VendorService vendorService = new VendorService
+            {
+                QuotedRate = 0,
+                FreezedRate = 0,
+                ServicesItems = ExtensionClass.ToSelectListItems<TBL_M_Services>(serviceL, x => x.Services, x => x.ServicesID.ToString()),
+                QuotedCurrencyItems = ExtensionClass.ToSelectListItems<VendorService>(currencyQuotedL, x => x.QuotedCurrency, x => x.QuotedCurrencyID.ToString()),
+                FreezedCurrencyItems = ExtensionClass.ToSelectListItems<VendorService>(currencyFreezedL, x => x.FreezedCurreny, x => x.FreezedCurrenyID.ToString()),
+
+
+            };
+            return vendorService;
+
+        }
+
+        #endregion
+
+
+
+
+
 
         //public static IEnumerable<T> ToEnum(var list)
         //{

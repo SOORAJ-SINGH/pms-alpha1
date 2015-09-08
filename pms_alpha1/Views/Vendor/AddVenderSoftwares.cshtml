@@ -1,0 +1,13 @@
+﻿@using pms_alpha1.Helpers
+@model pms_alpha1.ViewModels.VenderSoftware
+
+<div class="AddVenderSoftwaresRow">
+    @using (Html.BeginCollectionItem("venderSoftware"))
+    {
+        <b>Software Name:</b>  @Html.DropDownListFor(model => model.SoftwareID, Model.SoftwaresItems, htmlAttributes: new { @class = "form-control" })
+        <b>Version:</b>    @Html.TextBoxFor(model => model.Version, Model.Version, htmlAttributes: new { @class = "form-control" })
+        <b>Expertise:</b>    @Html.DropDownListFor(model => model.ExpertiseID, Model.ExpertiseItems, htmlAttributes: new { @class = "form-control" })
+        <a href="#" class="deleteRow">Delete</a>
+    }
+
+</div>

@@ -1,0 +1,15 @@
+﻿@using pms_alpha1.Helpers
+@model pms_alpha1.ViewModels.VendorService
+
+<div class="AddLanguagePairRow">
+    @using (Html.BeginCollectionItem("vendorService"))
+    {
+        <b>Service:</b>             @Html.DropDownListFor(model => model.ServiceID, Model.ServicesItems, htmlAttributes: new { @class = "form-control" })
+        <b>Quoted Currency:</b>     @Html.DropDownListFor(model => model.QuotedCurrencyID, Model.QuotedCurrencyItems, htmlAttributes: new { @class = "form-control" })
+        <b>Quoted Rate:</b>        @Html.TextBoxFor(model => model.QuotedRate, htmlAttributes: new { @class = "form-control" })
+        <b>Freezed Currency:</b>    @Html.DropDownListFor(model => model.FreezedCurrenyID, Model.FreezedCurrencyItems, htmlAttributes: new { @class = "form-control" })
+        <b>Freezed Rate:</b>        @Html.TextBoxFor(model => model.FreezedRate, htmlAttributes: new { @class = "form-control" })
+        <a href="#" class="deleteRow">Delete</a>
+    }
+
+</div>
