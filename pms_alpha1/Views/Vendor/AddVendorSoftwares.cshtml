@@ -1,8 +1,8 @@
 ﻿@using pms_alpha1.Helpers
-@model pms_alpha1.ViewModels.VenderSoftware
+@model pms_alpha1.ViewModels.VendorSoftware
 
-<div class="AddVenderSoftwaresRow">
-    @using (Html.BeginCollectionItem("venderSoftware"))
+<div class="AddVendorSoftwaresRow">
+    @using (Html.BeginCollectionItem("VendorSoftware"))
     {
         <b>Software Name:</b>  @Html.DropDownListFor(model => model.SoftwareID, Model.SoftwaresItems, htmlAttributes: new { @class = "form-control" })
         <b>Version:</b>    @Html.TextBoxFor(model => model.Version, Model.Version, htmlAttributes: new { @class = "form-control" })

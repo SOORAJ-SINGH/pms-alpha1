@@ -433,14 +433,14 @@
         <br />
 
 
-        <div id="AddVenderSoftwares">
+        <div id="AddVendorSoftwares">
             <h2>Vendor Softwares</h2>
-            @foreach (var item in Model.VenderSoftware)
+            @foreach (var item in Model.VendorSoftware)
             {
 
-                @Html.Partial("AddVenderSoftwares", item)
+                @Html.Partial("AddVendorSoftwares", item)
             }
-            @Html.ActionLink("Add", "AddVenderSoftwares", null, new { id = "addVenderSoftwaresItem" })
+            @Html.ActionLink("Add", "AddVendorSoftwares", null, new { id = "addVendorSoftwaresItem" })
         </div>
 
 

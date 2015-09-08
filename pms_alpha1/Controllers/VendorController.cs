@@ -39,8 +39,8 @@ namespace pms_alpha1.Controllers
 
             List<VendorLanguagePair> LanguagePairList = new List<VendorLanguagePair>{ ExtensionClass.GetLanguagePair() };
             vendorRegister.VendorLanguagePair = LanguagePairList;
-            List<VenderSoftware> SoftwareList = new List<VenderSoftware>{ ExtensionClass.GetSoftware() };
-            vendorRegister.VenderSoftware = SoftwareList;
+            List<VendorSoftware> SoftwareList = new List<VendorSoftware>{ ExtensionClass.GetSoftware() };
+            vendorRegister.VendorSoftware = SoftwareList;
             List<VendorService> ServicesList = new List<VendorService>{ ExtensionClass.GetServices() };
             vendorRegister.VendorService = ServicesList;
 
@@ -92,11 +92,11 @@ namespace pms_alpha1.Controllers
 
             return PartialView("AddLanguagePair", ExtensionClass.GetLanguagePair());
         }
-        //returns the Partial View to AddVenderSoftwares dynamically 
-        public ActionResult AddVenderSoftwares()
+        //returns the Partial View to AddVendorSoftwares dynamically 
+        public ActionResult AddVendorSoftwares()
         {
 
-            return PartialView("AddVenderSoftwares",ExtensionClass.GetSoftware());
+            return PartialView("AddVendorSoftwares",ExtensionClass.GetSoftware());
         }
         //returns the Partial View to AddVendorServices dynamically 
         public ActionResult AddVendorServices()
@@ -116,19 +116,19 @@ namespace pms_alpha1.Controllers
         #endregion
 
         #region Get Data to be binded for the dropDownList
-        public static VenderSoftware GetSoftware()
+        public static VendorSoftware GetSoftware()
         {
             //logic for drop down list Softwares Names and Expertise
             //improve this code ....to directly get the data in the list Format
             var softwareList = from software in unitOfWork.VendorSoftwareRepository.Get() select software;
 
-            var softwareL = new List<VenderSoftware>();
+            var softwareL = new List<VendorSoftware>();
 
             if (softwareList.Any())
             {
                 foreach (var d in softwareList)
                 {
-                    softwareL.Add(new VenderSoftware() { SoftwareID = d.SoftwareID, Software = d.Software });
+                    softwareL.Add(new VendorSoftware() { SoftwareID = d.SoftwareID, Software = d.Software });
                 }
             }
 
@@ -144,15 +144,15 @@ namespace pms_alpha1.Controllers
                 }
             }
             //creating the list of blank software pair..to be displayed as default
-            VenderSoftware venderSoftware = new VenderSoftware
+            VendorSoftware VendorSoftware = new VendorSoftware
             {
                 Version = "0",
-                SoftwaresItems = ExtensionClass.ToSelectListItems<VenderSoftware>(softwareL, x => x.Software, x => x.SoftwareID.ToString()),
+                SoftwaresItems = ExtensionClass.ToSelectListItems<VendorSoftware>(softwareL, x => x.Software, x => x.SoftwareID.ToString()),
                 ExpertiseItems = ExtensionClass.ToSelectListItems<TBL_M_Expertise>(expertiseL, x => x.Expertise, x => x.ExpertiseID.ToString()),
 
 
             };
-            return venderSoftware;
+            return VendorSoftware;
 
         }
 

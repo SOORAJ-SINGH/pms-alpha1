@@ -505,7 +505,7 @@
     <Content Include="Views\Vendor\Create.cshtml" />
     <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Vendor\AddLanguagePair.cshtml" />
-    <Content Include="Views\Vendor\AddVenderSoftwares.cshtml" />
+    <Content Include="Views\Vendor\AddVendorSoftwares.cshtml" />
     <Content Include="Views\Vendor\AddVendorServices.cshtml" />
   </ItemGroup>
   <ItemGroup>

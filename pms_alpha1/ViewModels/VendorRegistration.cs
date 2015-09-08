@@ -134,7 +134,7 @@ namespace pms_alpha1.ViewModels
 
 
 
-        public virtual ICollection<VenderSoftware> VenderSoftware { get; set; }
+        public virtual ICollection<VendorSoftware> VendorSoftware { get; set; }
         //public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
         public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
         public virtual ICollection<VendorService> VendorService { get; set; }
@@ -186,9 +186,9 @@ namespace pms_alpha1.ViewModels
         public bool Staus { get; set; }
     }
 
-    public class VenderSoftware
+    public class VendorSoftware
     {
-        public long VenderSoftwareID { get; set; }
+        public long VendorSoftwareID { get; set; }
         public Nullable<int> VendorID { get; set; }
         public Nullable<int> SoftwareID { get; set; }
         public string Software { get; set; }

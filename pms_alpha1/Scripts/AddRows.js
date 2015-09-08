@@ -19,13 +19,17 @@ $(document).on("click", "a.deleteRow", function () {
     return false;
 });
 
+
+
+
+
 ///  Adds Click event on the Add button to call action and get the partial Html
 ///  append in the div
-$("#addVenderSoftwaresItem").click(function () {
+$("#addVendorSoftwaresItem").click(function () {
     $.ajax({
         url: this.href,
         cache: false,
-        success: function (html) { $("#AddVenderSoftwares").append(html); }
+        success: function (html) { $("#AddVendorSoftwares").append(html); }
     });
     return false;
 });
@@ -34,7 +38,7 @@ $("#addVenderSoftwaresItem").click(function () {
 $(document).on("click", "a.deleteRow", function () {
     console.log('Deleting..');
     //alert('working');
-    $(this).parents("div.AddVenderSoftwaresRow:first").remove();
+    $(this).parents("div.AddVendorSoftwaresRow:first").remove();
     return false;
 });
 
