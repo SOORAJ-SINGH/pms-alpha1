@@ -16,13 +16,13 @@ namespace pms_alpha1
     {
         public TBL_M_Expertise()
         {
-            this.TBL_VenderSoftware = new HashSet<TBL_VenderSoftware>();
+            this.TBL_VendorSoftware = new HashSet<TBL_VendorSoftware>();
         }
     
         public int ExpertiseID { get; set; }
         public string Expertise { get; set; }
         public bool Staus { get; set; }
     
-        public virtual ICollection<TBL_VenderSoftware> TBL_VenderSoftware { get; set; }
+        public virtual ICollection<TBL_VendorSoftware> TBL_VendorSoftware { get; set; }
     }
 }

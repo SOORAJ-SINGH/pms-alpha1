@@ -16,13 +16,13 @@ namespace pms_alpha1
     {
         public TBL_M_Domain()
         {
-            this.TBL_Vendor = new HashSet<TBL_Vendor>();
+            this.TBL_VendorDomain = new HashSet<TBL_VendorDomain>();
         }
     
         public int DomainID { get; set; }
         public string Domain { get; set; }
         public bool Staus { get; set; }
     
-        public virtual ICollection<TBL_Vendor> TBL_Vendor { get; set; }
+        public virtual ICollection<TBL_VendorDomain> TBL_VendorDomain { get; set; }
     }
 }

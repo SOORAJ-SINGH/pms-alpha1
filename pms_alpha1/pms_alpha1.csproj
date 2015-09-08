@@ -166,7 +166,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\TBL_VendorController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="GenericRepository\GenericRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,6 +196,9 @@
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_ClientPM.cs">
+      <DependentUpon>pmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_M_Academics.cs">
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_M_City.cs">
@@ -268,16 +270,19 @@
     <Compile Include="TBL_TrackerSPC.cs">
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TBL_VenderSoftware.cs">
+    <Compile Include="TBL_Vendor.cs">
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TBL_Vendor.cs">
+    <Compile Include="TBL_VendorDomain.cs">
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_VendorLanguagePair.cs">
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_VendorService.cs">
+      <DependentUpon>pmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_VendorSoftware.cs">
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
@@ -497,11 +502,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\TBL_Vendor\Create.cshtml" />
-    <Content Include="Views\TBL_Vendor\Delete.cshtml" />
-    <Content Include="Views\TBL_Vendor\Details.cshtml" />
-    <Content Include="Views\TBL_Vendor\Edit.cshtml" />
-    <Content Include="Views\TBL_Vendor\Index.cshtml" />
     <Content Include="Views\Vendor\Create.cshtml" />
     <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Vendor\AddLanguagePair.cshtml" />

@@ -12,9 +12,9 @@ namespace pms_alpha1
     using System;
     using System.Collections.Generic;
     
-    public partial class TBL_VenderSoftware
+    public partial class TBL_VendorSoftware
     {
-        public long VenderSoftwareID { get; set; }
+        public long VendorSoftwareID { get; set; }
         public Nullable<int> VendorID { get; set; }
         public Nullable<int> SoftwareID { get; set; }
         public string Version { get; set; }

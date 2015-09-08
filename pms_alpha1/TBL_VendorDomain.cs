@@ -12,17 +12,14 @@ namespace pms_alpha1
     using System;
     using System.Collections.Generic;
     
-    public partial class TBL_M_Software
+    public partial class TBL_VendorDomain
     {
-        public TBL_M_Software()
-        {
-            this.TBL_VendorSoftware = new HashSet<TBL_VendorSoftware>();
-        }
+        public int VendorDomainID { get; set; }
+        public Nullable<int> VendorID { get; set; }
+        public Nullable<int> DomainID { get; set; }
+        public Nullable<bool> Status { get; set; }
     
-        public int SoftwareID { get; set; }
-        public string Software { get; set; }
-        public bool Staus { get; set; }
-    
-        public virtual ICollection<TBL_VendorSoftware> TBL_VendorSoftware { get; set; }
+        public virtual TBL_M_Domain TBL_M_Domain { get; set; }
+        public virtual TBL_Vendor TBL_Vendor { get; set; }
     }
 }

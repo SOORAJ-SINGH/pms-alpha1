@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="28b56de63adb491ca966ff0b9f476693" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="28b56de63adb491ca966ff0b9f476693" Name="Diagram1" ZoomLevel="38">
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_Client" Width="1.5" PointX="2.5" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_ClientPM" Width="1.5" PointX="3.5" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_City" Width="1.5" PointX="4.375" PointY="11.375" IsExpanded="true" />
@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_Currency" Width="1.75" PointX="13.875" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_DeliverStatus" Width="1.875" PointX="0.5" PointY="30.875" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_Designation" Width="1.875" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_Domain" Width="1.5" PointX="2.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_Domain" Width="1.5" PointX="9.125" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_Expertise" Width="2" PointX="11.875" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_Language" Width="1.875" PointX="12" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_ModeOfPayment" Width="2.125" PointX="2.75" PointY="1.75" IsExpanded="true" />
@@ -30,8 +30,7 @@
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_TrackerPC" Width="1.75" PointX="11.5" PointY="29.5" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_TrackerPM" Width="1.5" PointX="9.25" PointY="29.5" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_TrackerSPC" Width="1.5" PointX="13.75" PointY="29.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_VenderSoftware" Width="1.875" PointX="9.375" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_Vendor" Width="1.5" PointX="6.625" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_Vendor" Width="1.875" PointX="6.625" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_VendorLanguagePair" Width="2" PointX="9.375" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_VendorService" Width="1.75" PointX="9.375" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ClientPM_TBL_Client" ManuallyRouted="false" />
@@ -45,8 +44,6 @@
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorService_FreezedCurrency_TBL_M_Currency" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorService_QuotedCurrency_TBL_M_Currency" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ProjectTask_TBL_M_DeliverStatus" ManuallyRouted="false" />
-        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Domain" ManuallyRouted="false" />
-        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VenderSoftware_TBL_M_Expertise" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ProjectTask_TBL_M_Language" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ProjectTask_TBL_M_Language1" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorLanguagePair_TBL_M_Language" ManuallyRouted="false" />
@@ -54,7 +51,6 @@
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ProjectTask_TBL_M_OnTimeDeliverStatus" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ProjectTask_TBL_M_ProcessStatus" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorService_TBL_M_Services" ManuallyRouted="false" />
-        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VenderSoftware_TBL_M_Software" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_State" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ProjectTask_TBL_M_TaskType" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_ProjectTask_TBL_M_Unit" ManuallyRouted="false" />
@@ -68,9 +64,17 @@
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_TrackerSPC_TBL_Project" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_TrackerPC_TBL_Vendor" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_TrackerSPC_TBL_Vendor" ManuallyRouted="false" />
-        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VenderSoftware_TBL_Vendor" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorLanguagePair_TBL_Vendor" ManuallyRouted="false" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorService_TBL_Vendor" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_M_Academics" Width="2" PointX="3.875" PointY="14.625" />
+        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_VendorDomain" Width="2" PointX="11.375" PointY="4.375" />
+        <EntityTypeShape EntityType="somyatrans_pmsDBModel.TBL_VendorSoftware" Width="2" PointX="9.375" PointY="10.875" />
+        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Academics" />
+        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_M_Domain" />
+        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Expertise" />
+        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Software" />
+        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_Vendor" />
+        <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_Vendor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

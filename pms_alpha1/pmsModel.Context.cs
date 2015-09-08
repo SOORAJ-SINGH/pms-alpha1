@@ -50,9 +50,11 @@ namespace pms_alpha1
         public virtual DbSet<TBL_TrackerPC> TBL_TrackerPC { get; set; }
         public virtual DbSet<TBL_TrackerPM> TBL_TrackerPM { get; set; }
         public virtual DbSet<TBL_TrackerSPC> TBL_TrackerSPC { get; set; }
-        public virtual DbSet<TBL_VenderSoftware> TBL_VenderSoftware { get; set; }
         public virtual DbSet<TBL_Vendor> TBL_Vendor { get; set; }
         public virtual DbSet<TBL_VendorLanguagePair> TBL_VendorLanguagePair { get; set; }
         public virtual DbSet<TBL_VendorService> TBL_VendorService { get; set; }
+        public virtual DbSet<TBL_M_Academics> TBL_M_Academics { get; set; }
+        public virtual DbSet<TBL_VendorDomain> TBL_VendorDomain { get; set; }
+        public virtual DbSet<TBL_VendorSoftware> TBL_VendorSoftware { get; set; }
     }
 }

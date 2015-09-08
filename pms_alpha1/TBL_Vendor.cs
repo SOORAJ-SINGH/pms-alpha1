@@ -18,9 +18,10 @@ namespace pms_alpha1
         {
             this.TBL_TrackerPC = new HashSet<TBL_TrackerPC>();
             this.TBL_TrackerSPC = new HashSet<TBL_TrackerSPC>();
-            this.TBL_VenderSoftware = new HashSet<TBL_VenderSoftware>();
             this.TBL_VendorLanguagePair = new HashSet<TBL_VendorLanguagePair>();
             this.TBL_VendorService = new HashSet<TBL_VendorService>();
+            this.TBL_VendorDomain = new HashSet<TBL_VendorDomain>();
+            this.TBL_VendorSoftware = new HashSet<TBL_VendorSoftware>();
         }
     
         public int VendorID { get; set; }
@@ -29,7 +30,6 @@ namespace pms_alpha1
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<System.DateTime> DateOfAniversary { get; set; }
         public string NativeLanguage { get; set; }
-        public string AcademicQualification { get; set; }
         public string ProfessionalQualification { get; set; }
         public string EmailID { get; set; }
         public string AlternateEmailID { get; set; }
@@ -42,7 +42,6 @@ namespace pms_alpha1
         public Nullable<int> StateID { get; set; }
         public Nullable<int> CountryID { get; set; }
         public string PinCode { get; set; }
-        public Nullable<int> DomainID { get; set; }
         public string Capacity { get; set; }
         public Nullable<System.TimeSpan> WorkingTime { get; set; }
         public string RAM { get; set; }
@@ -72,15 +71,17 @@ namespace pms_alpha1
         public string UploadPhoto { get; set; }
         public string UploadPersonalID { get; set; }
         public Nullable<bool> Status { get; set; }
+        public Nullable<int> AcademicQualificationID { get; set; }
     
         public virtual TBL_M_City TBL_M_City { get; set; }
         public virtual TBL_M_Country TBL_M_Country { get; set; }
-        public virtual TBL_M_Domain TBL_M_Domain { get; set; }
         public virtual TBL_M_State TBL_M_State { get; set; }
         public virtual ICollection<TBL_TrackerPC> TBL_TrackerPC { get; set; }
         public virtual ICollection<TBL_TrackerSPC> TBL_TrackerSPC { get; set; }
-        public virtual ICollection<TBL_VenderSoftware> TBL_VenderSoftware { get; set; }
         public virtual ICollection<TBL_VendorLanguagePair> TBL_VendorLanguagePair { get; set; }
         public virtual ICollection<TBL_VendorService> TBL_VendorService { get; set; }
+        public virtual TBL_M_Academics TBL_M_Academics { get; set; }
+        public virtual ICollection<TBL_VendorDomain> TBL_VendorDomain { get; set; }
+        public virtual ICollection<TBL_VendorSoftware> TBL_VendorSoftware { get; set; }
     }
 }

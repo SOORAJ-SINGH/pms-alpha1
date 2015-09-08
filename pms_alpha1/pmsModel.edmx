@@ -39,6 +39,14 @@
           <Property Name="SkypeID" Type="varchar" MaxLength="100" />
           <Property Name="Status" Type="bit" />
         </EntityType>
+        <EntityType Name="TBL_M_Academics">
+          <Key>
+            <PropertyRef Name="AcademicsID" />
+          </Key>
+          <Property Name="AcademicsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Academics" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
         <EntityType Name="TBL_M_City">
           <Key>
             <PropertyRef Name="CityID" />
@@ -263,17 +271,6 @@
           <Property Name="POID" Type="int" />
           <Property Name="Remarks" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="TBL_VenderSoftware">
-          <Key>
-            <PropertyRef Name="VenderSoftwareID" />
-          </Key>
-          <Property Name="VenderSoftwareID" Type="bigint" Nullable="false" />
-          <Property Name="VendorID" Type="int" />
-          <Property Name="SoftwareID" Type="int" />
-          <Property Name="Version" Type="varchar" MaxLength="50" />
-          <Property Name="ExpertiseID" Type="int" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
         <EntityType Name="TBL_Vendor">
           <Key>
             <PropertyRef Name="VendorID" />
@@ -284,7 +281,7 @@
           <Property Name="DateOfBirth" Type="date" />
           <Property Name="DateOfAniversary" Type="date" />
           <Property Name="NativeLanguage" Type="varchar" MaxLength="100" />
-          <Property Name="AcademicQualification" Type="varchar" MaxLength="100" />
+          <Property Name="AcademicQualificationID" Type="int" />
           <Property Name="ProfessionalQualification" Type="varchar" MaxLength="100" />
           <Property Name="EmailID" Type="varchar" MaxLength="100" />
           <Property Name="AlternateEmailID" Type="varchar" MaxLength="100" />
@@ -297,7 +294,6 @@
           <Property Name="StateID" Type="int" />
           <Property Name="CountryID" Type="int" />
           <Property Name="PinCode" Type="varchar" MaxLength="50" />
-          <Property Name="DomainID" Type="int" />
           <Property Name="Capacity" Type="varchar" MaxLength="100" />
           <Property Name="WorkingTime" Type="time" Precision="7" />
           <Property Name="RAM" Type="varchar" MaxLength="10" />
@@ -328,6 +324,15 @@
           <Property Name="UploadPersonalID" Type="varchar" MaxLength="100" />
           <Property Name="Status" Type="bit" />
         </EntityType>
+        <EntityType Name="TBL_VendorDomain">
+          <Key>
+            <PropertyRef Name="VendorDomainID" />
+          </Key>
+          <Property Name="VendorDomainID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="DomainID" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
         <EntityType Name="TBL_VendorLanguagePair">
           <Key>
             <PropertyRef Name="VendorLanguagePairID" />
@@ -349,6 +354,17 @@
           <Property Name="QuotedRate" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FreezedCurrenyID" Type="int" />
           <Property Name="FreezedRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_VendorSoftware">
+          <Key>
+            <PropertyRef Name="VendorSoftwareID" />
+          </Key>
+          <Property Name="VendorSoftwareID" Type="bigint" Nullable="false" />
+          <Property Name="VendorID" Type="int" />
+          <Property Name="SoftwareID" Type="int" />
+          <Property Name="Version" Type="varchar" MaxLength="50" />
+          <Property Name="ExpertiseID" Type="int" />
           <Property Name="Status" Type="bit" />
         </EntityType>
         <Association Name="FK_TBL_ClientPM_TBL_Client">
@@ -615,39 +631,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TBL_VenderSoftware_TBL_M_Expertise">
-          <End Role="TBL_M_Expertise" Type="Self.TBL_M_Expertise" Multiplicity="0..1" />
-          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
+        <Association Name="FK_TBL_Vendor_TBL_M_Academics">
+          <End Role="TBL_M_Academics" Type="Self.TBL_M_Academics" Multiplicity="0..1" />
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TBL_M_Expertise">
-              <PropertyRef Name="ExpertiseID" />
+            <Principal Role="TBL_M_Academics">
+              <PropertyRef Name="AcademicsID" />
             </Principal>
-            <Dependent Role="TBL_VenderSoftware">
-              <PropertyRef Name="ExpertiseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TBL_VenderSoftware_TBL_M_Software">
-          <End Role="TBL_M_Software" Type="Self.TBL_M_Software" Multiplicity="0..1" />
-          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_M_Software">
-              <PropertyRef Name="SoftwareID" />
-            </Principal>
-            <Dependent Role="TBL_VenderSoftware">
-              <PropertyRef Name="SoftwareID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TBL_VenderSoftware_TBL_Vendor">
-          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
-          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_Vendor">
-              <PropertyRef Name="VendorID" />
-            </Principal>
-            <Dependent Role="TBL_VenderSoftware">
-              <PropertyRef Name="VendorID" />
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="AcademicQualificationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -675,18 +667,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TBL_Vendor_TBL_M_Domain">
-          <End Role="TBL_M_Domain" Type="Self.TBL_M_Domain" Multiplicity="0..1" />
-          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_M_Domain">
-              <PropertyRef Name="DomainID" />
-            </Principal>
-            <Dependent Role="TBL_Vendor">
-              <PropertyRef Name="DomainID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TBL_Vendor_TBL_M_State">
           <End Role="TBL_M_State" Type="Self.TBL_M_State" Multiplicity="0..1" />
           <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
@@ -696,6 +676,30 @@
             </Principal>
             <Dependent Role="TBL_Vendor">
               <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorDomain_TBL_M_Domain">
+          <End Role="TBL_M_Domain" Type="Self.TBL_M_Domain" Multiplicity="0..1" />
+          <End Role="TBL_VendorDomain" Type="Self.TBL_VendorDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Domain">
+              <PropertyRef Name="DomainID" />
+            </Principal>
+            <Dependent Role="TBL_VendorDomain">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorDomain_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VendorDomain" Type="Self.TBL_VendorDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorDomain">
+              <PropertyRef Name="VendorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -783,9 +787,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TBL_VendorSoftware_TBL_M_Expertise">
+          <End Role="TBL_M_Expertise" Type="Self.TBL_M_Expertise" Multiplicity="0..1" />
+          <End Role="TBL_VendorSoftware" Type="Self.TBL_VendorSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Expertise">
+              <PropertyRef Name="ExpertiseID" />
+            </Principal>
+            <Dependent Role="TBL_VendorSoftware">
+              <PropertyRef Name="ExpertiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorSoftware_TBL_M_Software">
+          <End Role="TBL_M_Software" Type="Self.TBL_M_Software" Multiplicity="0..1" />
+          <End Role="TBL_VendorSoftware" Type="Self.TBL_VendorSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Software">
+              <PropertyRef Name="SoftwareID" />
+            </Principal>
+            <Dependent Role="TBL_VendorSoftware">
+              <PropertyRef Name="SoftwareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorSoftware_TBL_Vendor">
+          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
+          <End Role="TBL_VendorSoftware" Type="Self.TBL_VendorSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorSoftware">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="somyatrans_pmsDBModelStoreContainer">
           <EntitySet Name="TBL_Client" EntityType="Self.TBL_Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ClientPM" EntityType="Self.TBL_ClientPM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_M_Academics" EntityType="Self.TBL_M_Academics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_M_City" EntityType="Self.TBL_M_City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_M_Country" EntityType="Self.TBL_M_Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_M_Currency" EntityType="Self.TBL_M_Currency" Schema="dbo" store:Type="Tables" />
@@ -809,10 +850,11 @@
           <EntitySet Name="TBL_TrackerPC" EntityType="Self.TBL_TrackerPC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_TrackerPM" EntityType="Self.TBL_TrackerPM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_TrackerSPC" EntityType="Self.TBL_TrackerSPC" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TBL_VenderSoftware" EntityType="Self.TBL_VenderSoftware" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_Vendor" EntityType="Self.TBL_Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_VendorDomain" EntityType="Self.TBL_VendorDomain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_VendorLanguagePair" EntityType="Self.TBL_VendorLanguagePair" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_VendorService" EntityType="Self.TBL_VendorService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_VendorSoftware" EntityType="Self.TBL_VendorSoftware" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TBL_ClientPM_TBL_Client" Association="Self.FK_TBL_ClientPM_TBL_Client">
             <End Role="TBL_Client" EntitySet="TBL_Client" />
             <End Role="TBL_ClientPM" EntitySet="TBL_ClientPM" />
@@ -901,17 +943,9 @@
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
             <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
           </AssociationSet>
-          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Expertise" Association="Self.FK_TBL_VenderSoftware_TBL_M_Expertise">
-            <End Role="TBL_M_Expertise" EntitySet="TBL_M_Expertise" />
-            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Software" Association="Self.FK_TBL_VenderSoftware_TBL_M_Software">
-            <End Role="TBL_M_Software" EntitySet="TBL_M_Software" />
-            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_Vendor" Association="Self.FK_TBL_VenderSoftware_TBL_Vendor">
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Academics" Association="Self.FK_TBL_Vendor_TBL_M_Academics">
+            <End Role="TBL_M_Academics" EntitySet="TBL_M_Academics" />
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
-            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_Vendor_TBL_M_City" Association="Self.FK_TBL_Vendor_TBL_M_City">
             <End Role="TBL_M_City" EntitySet="TBL_M_City" />
@@ -921,13 +955,17 @@
             <End Role="TBL_M_Country" EntitySet="TBL_M_Country" />
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
           </AssociationSet>
-          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Domain" Association="Self.FK_TBL_Vendor_TBL_M_Domain">
-            <End Role="TBL_M_Domain" EntitySet="TBL_M_Domain" />
-            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
-          </AssociationSet>
           <AssociationSet Name="FK_TBL_Vendor_TBL_M_State" Association="Self.FK_TBL_Vendor_TBL_M_State">
             <End Role="TBL_M_State" EntitySet="TBL_M_State" />
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorDomain_TBL_M_Domain" Association="Self.FK_TBL_VendorDomain_TBL_M_Domain">
+            <End Role="TBL_M_Domain" EntitySet="TBL_M_Domain" />
+            <End Role="TBL_VendorDomain" EntitySet="TBL_VendorDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorDomain_TBL_Vendor" Association="Self.FK_TBL_VendorDomain_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorDomain" EntitySet="TBL_VendorDomain" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_M_Language" Association="Self.FK_TBL_VendorLanguagePair_TBL_M_Language">
             <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
@@ -956,6 +994,18 @@
           <AssociationSet Name="FK_TBL_VendorService_TBL_Vendor" Association="Self.FK_TBL_VendorService_TBL_Vendor">
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
             <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorSoftware_TBL_M_Expertise" Association="Self.FK_TBL_VendorSoftware_TBL_M_Expertise">
+            <End Role="TBL_M_Expertise" EntitySet="TBL_M_Expertise" />
+            <End Role="TBL_VendorSoftware" EntitySet="TBL_VendorSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorSoftware_TBL_M_Software" Association="Self.FK_TBL_VendorSoftware_TBL_M_Software">
+            <End Role="TBL_M_Software" EntitySet="TBL_M_Software" />
+            <End Role="TBL_VendorSoftware" EntitySet="TBL_VendorSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorSoftware_TBL_Vendor" Association="Self.FK_TBL_VendorSoftware_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorSoftware" EntitySet="TBL_VendorSoftware" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1055,7 +1105,7 @@
           <Property Name="DomainID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Domain" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Staus" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_Vendor_TBL_M_Domain" FromRole="TBL_M_Domain" ToRole="TBL_Vendor" />
+          <NavigationProperty Name="TBL_VendorDomain" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_M_Domain" FromRole="TBL_M_Domain" ToRole="TBL_VendorDomain1" />
         </EntityType>
         <EntityType Name="TBL_M_Expertise">
           <Key>
@@ -1064,7 +1114,7 @@
           <Property Name="ExpertiseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Expertise" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Staus" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TBL_VenderSoftware" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Expertise" FromRole="TBL_M_Expertise" ToRole="TBL_VenderSoftware" />
+          <NavigationProperty Name="TBL_VendorSoftware" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Expertise" FromRole="TBL_M_Expertise" ToRole="TBL_VendorSoftware" />
         </EntityType>
         <EntityType Name="TBL_M_Language">
           <Key>
@@ -1128,7 +1178,7 @@
           <Property Name="SoftwareID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Software" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Staus" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TBL_VenderSoftware" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Software" FromRole="TBL_M_Software" ToRole="TBL_VenderSoftware" />
+          <NavigationProperty Name="TBL_VendorSoftware" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Software" FromRole="TBL_M_Software" ToRole="TBL_VendorSoftware" />
         </EntityType>
         <EntityType Name="TBL_M_State">
           <Key>
@@ -1273,20 +1323,6 @@
           <NavigationProperty Name="TBL_Project" Relationship="Self.FK_TBL_TrackerSPC_TBL_Project" FromRole="TBL_TrackerSPC" ToRole="TBL_Project" />
           <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_TrackerSPC_TBL_Vendor" FromRole="TBL_TrackerSPC" ToRole="TBL_Vendor" />
         </EntityType>
-        <EntityType Name="TBL_VenderSoftware">
-          <Key>
-            <PropertyRef Name="VenderSoftwareID" />
-          </Key>
-          <Property Name="VenderSoftwareID" Type="Int64" Nullable="false" />
-          <Property Name="VendorID" Type="Int32" />
-          <Property Name="SoftwareID" Type="Int32" />
-          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ExpertiseID" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="TBL_M_Expertise" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Expertise" FromRole="TBL_VenderSoftware" ToRole="TBL_M_Expertise" />
-          <NavigationProperty Name="TBL_M_Software" Relationship="Self.FK_TBL_VenderSoftware_TBL_M_Software" FromRole="TBL_VenderSoftware" ToRole="TBL_M_Software" />
-          <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_VenderSoftware_TBL_Vendor" FromRole="TBL_VenderSoftware" ToRole="TBL_Vendor" />
-        </EntityType>
         <EntityType Name="TBL_Vendor">
           <Key>
             <PropertyRef Name="VendorID" />
@@ -1297,7 +1333,6 @@
           <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
           <Property Name="DateOfAniversary" Type="DateTime" Precision="0" />
           <Property Name="NativeLanguage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="AcademicQualification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ProfessionalQualification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="EmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AlternateEmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1310,7 +1345,6 @@
           <Property Name="StateID" Type="Int32" />
           <Property Name="CountryID" Type="Int32" />
           <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DomainID" Type="Int32" />
           <Property Name="Capacity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="WorkingTime" Type="Time" Precision="7" />
           <Property Name="RAM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -1342,13 +1376,15 @@
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="TBL_M_City" Relationship="Self.FK_TBL_Vendor_TBL_M_City" FromRole="TBL_Vendor" ToRole="TBL_M_City" />
           <NavigationProperty Name="TBL_M_Country" Relationship="Self.FK_TBL_Vendor_TBL_M_Country" FromRole="TBL_Vendor" ToRole="TBL_M_Country" />
-          <NavigationProperty Name="TBL_M_Domain" Relationship="Self.FK_TBL_Vendor_TBL_M_Domain" FromRole="TBL_Vendor" ToRole="TBL_M_Domain" />
           <NavigationProperty Name="TBL_M_State" Relationship="Self.FK_TBL_Vendor_TBL_M_State" FromRole="TBL_Vendor" ToRole="TBL_M_State" />
           <NavigationProperty Name="TBL_TrackerPC" Relationship="Self.FK_TBL_TrackerPC_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_TrackerPC" />
           <NavigationProperty Name="TBL_TrackerSPC" Relationship="Self.FK_TBL_TrackerSPC_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_TrackerSPC" />
-          <NavigationProperty Name="TBL_VenderSoftware" Relationship="Self.FK_TBL_VenderSoftware_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VenderSoftware" />
           <NavigationProperty Name="TBL_VendorLanguagePair" Relationship="Self.FK_TBL_VendorLanguagePair_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorLanguagePair" />
           <NavigationProperty Name="TBL_VendorService" Relationship="Self.FK_TBL_VendorService_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorService" />
+          <Property Name="AcademicQualificationID" Type="Int32" />
+          <NavigationProperty Name="TBL_M_Academics" Relationship="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Academics" FromRole="TBL_Vendor" ToRole="TBL_M_Academics1" />
+          <NavigationProperty Name="TBL_VendorDomain" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorDomain1" />
+          <NavigationProperty Name="TBL_VendorSoftware" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorSoftware" />
         </EntityType>
         <EntityType Name="TBL_VendorLanguagePair">
           <Key>
@@ -1500,30 +1536,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TBL_Vendor_TBL_M_Domain">
-          <End Role="TBL_M_Domain" Type="Self.TBL_M_Domain" Multiplicity="0..1" />
-          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_M_Domain">
-              <PropertyRef Name="DomainID" />
-            </Principal>
-            <Dependent Role="TBL_Vendor">
-              <PropertyRef Name="DomainID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TBL_VenderSoftware_TBL_M_Expertise">
-          <End Role="TBL_M_Expertise" Type="Self.TBL_M_Expertise" Multiplicity="0..1" />
-          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_M_Expertise">
-              <PropertyRef Name="ExpertiseID" />
-            </Principal>
-            <Dependent Role="TBL_VenderSoftware">
-              <PropertyRef Name="ExpertiseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TBL_ProjectTask_TBL_M_Language">
           <End Role="TBL_M_Language" Type="Self.TBL_M_Language" Multiplicity="0..1" />
           <End Role="TBL_ProjectTask" Type="Self.TBL_ProjectTask" Multiplicity="*" />
@@ -1605,18 +1617,6 @@
             </Principal>
             <Dependent Role="TBL_VendorService">
               <PropertyRef Name="ServiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TBL_VenderSoftware_TBL_M_Software">
-          <End Role="TBL_M_Software" Type="Self.TBL_M_Software" Multiplicity="0..1" />
-          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_M_Software">
-              <PropertyRef Name="SoftwareID" />
-            </Principal>
-            <Dependent Role="TBL_VenderSoftware">
-              <PropertyRef Name="SoftwareID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1776,18 +1776,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TBL_VenderSoftware_TBL_Vendor">
-          <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
-          <End Role="TBL_VenderSoftware" Type="Self.TBL_VenderSoftware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_Vendor">
-              <PropertyRef Name="VendorID" />
-            </Principal>
-            <Dependent Role="TBL_VenderSoftware">
-              <PropertyRef Name="VendorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TBL_VendorLanguagePair_TBL_Vendor">
           <End Role="TBL_Vendor" Type="Self.TBL_Vendor" Multiplicity="0..1" />
           <End Role="TBL_VendorLanguagePair" Type="Self.TBL_VendorLanguagePair" Multiplicity="*" />
@@ -1838,7 +1826,6 @@
           <EntitySet Name="TBL_TrackerPC" EntityType="Self.TBL_TrackerPC" />
           <EntitySet Name="TBL_TrackerPM" EntityType="Self.TBL_TrackerPM" />
           <EntitySet Name="TBL_TrackerSPC" EntityType="Self.TBL_TrackerSPC" />
-          <EntitySet Name="TBL_VenderSoftware" EntityType="Self.TBL_VenderSoftware" />
           <EntitySet Name="TBL_Vendor" EntityType="Self.TBL_Vendor" />
           <EntitySet Name="TBL_VendorLanguagePair" EntityType="Self.TBL_VendorLanguagePair" />
           <EntitySet Name="TBL_VendorService" EntityType="Self.TBL_VendorService" />
@@ -1882,14 +1869,6 @@
             <End Role="TBL_M_DeliverStatus" EntitySet="TBL_M_DeliverStatus" />
             <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
           </AssociationSet>
-          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Domain" Association="Self.FK_TBL_Vendor_TBL_M_Domain">
-            <End Role="TBL_M_Domain" EntitySet="TBL_M_Domain" />
-            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Expertise" Association="Self.FK_TBL_VenderSoftware_TBL_M_Expertise">
-            <End Role="TBL_M_Expertise" EntitySet="TBL_M_Expertise" />
-            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
-          </AssociationSet>
           <AssociationSet Name="FK_TBL_ProjectTask_TBL_M_Language" Association="Self.FK_TBL_ProjectTask_TBL_M_Language">
             <End Role="TBL_M_Language" EntitySet="TBL_M_Language" />
             <End Role="TBL_ProjectTask" EntitySet="TBL_ProjectTask" />
@@ -1917,10 +1896,6 @@
           <AssociationSet Name="FK_TBL_VendorService_TBL_M_Services" Association="Self.FK_TBL_VendorService_TBL_M_Services">
             <End Role="TBL_M_Services" EntitySet="TBL_M_Services" />
             <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_M_Software" Association="Self.FK_TBL_VenderSoftware_TBL_M_Software">
-            <End Role="TBL_M_Software" EntitySet="TBL_M_Software" />
-            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_Vendor_TBL_M_State" Association="Self.FK_TBL_Vendor_TBL_M_State">
             <End Role="TBL_M_State" EntitySet="TBL_M_State" />
@@ -1974,10 +1949,6 @@
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
             <End Role="TBL_TrackerSPC" EntitySet="TBL_TrackerSPC" />
           </AssociationSet>
-          <AssociationSet Name="FK_TBL_VenderSoftware_TBL_Vendor" Association="Self.FK_TBL_VenderSoftware_TBL_Vendor">
-            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
-            <End Role="TBL_VenderSoftware" EntitySet="TBL_VenderSoftware" />
-          </AssociationSet>
           <AssociationSet Name="FK_TBL_VendorLanguagePair_TBL_Vendor" Association="Self.FK_TBL_VendorLanguagePair_TBL_Vendor">
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
             <End Role="TBL_VendorLanguagePair" EntitySet="TBL_VendorLanguagePair" />
@@ -1986,7 +1957,140 @@
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
             <End Role="TBL_VendorService" EntitySet="TBL_VendorService" />
           </AssociationSet>
+          <EntitySet Name="TBL_M_Academics" EntityType="somyatrans_pmsDBModel.TBL_M_Academics" />
+          <EntitySet Name="TBL_VendorDomain" EntityType="somyatrans_pmsDBModel.TBL_VendorDomain" />
+          <EntitySet Name="TBL_VendorSoftware" EntityType="somyatrans_pmsDBModel.TBL_VendorSoftware" />
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Academics" Association="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Academics">
+            <End Role="TBL_M_Academics1" EntitySet="TBL_M_Academics" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorDomain_TBL_M_Domain" Association="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_M_Domain">
+            <End Role="TBL_M_Domain" EntitySet="TBL_M_Domain" />
+            <End Role="TBL_VendorDomain1" EntitySet="TBL_VendorDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorSoftware_TBL_M_Expertise" Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Expertise">
+            <End Role="TBL_M_Expertise" EntitySet="TBL_M_Expertise" />
+            <End Role="TBL_VendorSoftware" EntitySet="TBL_VendorSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorSoftware_TBL_M_Software" Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Software">
+            <End Role="TBL_M_Software" EntitySet="TBL_M_Software" />
+            <End Role="TBL_VendorSoftware" EntitySet="TBL_VendorSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorDomain_TBL_Vendor" Association="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorDomain1" EntitySet="TBL_VendorDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_VendorSoftware_TBL_Vendor" Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_Vendor">
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+            <End Role="TBL_VendorSoftware" EntitySet="TBL_VendorSoftware" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TBL_M_Academics">
+          <Key>
+            <PropertyRef Name="AcademicsID" />
+          </Key>
+          <Property Name="AcademicsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Academics" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Academics" FromRole="TBL_M_Academics1" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_VendorDomain">
+          <Key>
+            <PropertyRef Name="VendorDomainID" />
+          </Key>
+          <Property Name="VendorDomainID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="DomainID" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_M_Domain" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_M_Domain" FromRole="TBL_VendorDomain1" ToRole="TBL_M_Domain" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_Vendor" FromRole="TBL_VendorDomain1" ToRole="TBL_Vendor" />
+        </EntityType>
+        <EntityType Name="TBL_VendorSoftware">
+          <Key>
+            <PropertyRef Name="VendorSoftwareID" />
+          </Key>
+          <Property Name="VendorSoftwareID" Type="Int64" Nullable="false" />
+          <Property Name="VendorID" Type="Int32" />
+          <Property Name="SoftwareID" Type="Int32" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExpertiseID" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TBL_M_Expertise" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Expertise" FromRole="TBL_VendorSoftware" ToRole="TBL_M_Expertise" />
+          <NavigationProperty Name="TBL_M_Software" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Software" FromRole="TBL_VendorSoftware" ToRole="TBL_M_Software" />
+          <NavigationProperty Name="TBL_Vendor" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_Vendor" FromRole="TBL_VendorSoftware" ToRole="TBL_Vendor" />
+        </EntityType>
+        <Association Name="FK_TBL_Vendor_TBL_M_Academics">
+          <End Type="somyatrans_pmsDBModel.TBL_M_Academics" Role="TBL_M_Academics1" Multiplicity="0..1" />
+          <End Type="somyatrans_pmsDBModel.TBL_Vendor" Role="TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Academics1">
+              <PropertyRef Name="AcademicsID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="AcademicQualificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorDomain_TBL_M_Domain">
+          <End Type="somyatrans_pmsDBModel.TBL_M_Domain" Role="TBL_M_Domain" Multiplicity="0..1" />
+          <End Type="somyatrans_pmsDBModel.TBL_VendorDomain" Role="TBL_VendorDomain1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Domain">
+              <PropertyRef Name="DomainID" />
+            </Principal>
+            <Dependent Role="TBL_VendorDomain1">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorSoftware_TBL_M_Expertise">
+          <End Type="somyatrans_pmsDBModel.TBL_M_Expertise" Role="TBL_M_Expertise" Multiplicity="0..1" />
+          <End Type="somyatrans_pmsDBModel.TBL_VendorSoftware" Role="TBL_VendorSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Expertise">
+              <PropertyRef Name="ExpertiseID" />
+            </Principal>
+            <Dependent Role="TBL_VendorSoftware">
+              <PropertyRef Name="ExpertiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorSoftware_TBL_M_Software">
+          <End Type="somyatrans_pmsDBModel.TBL_M_Software" Role="TBL_M_Software" Multiplicity="0..1" />
+          <End Type="somyatrans_pmsDBModel.TBL_VendorSoftware" Role="TBL_VendorSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Software">
+              <PropertyRef Name="SoftwareID" />
+            </Principal>
+            <Dependent Role="TBL_VendorSoftware">
+              <PropertyRef Name="SoftwareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorDomain_TBL_Vendor">
+          <End Type="somyatrans_pmsDBModel.TBL_Vendor" Role="TBL_Vendor" Multiplicity="0..1" />
+          <End Type="somyatrans_pmsDBModel.TBL_VendorDomain" Role="TBL_VendorDomain1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorDomain1">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_VendorSoftware_TBL_Vendor">
+          <End Type="somyatrans_pmsDBModel.TBL_Vendor" Role="TBL_Vendor" Multiplicity="0..1" />
+          <End Type="somyatrans_pmsDBModel.TBL_VendorSoftware" Role="TBL_VendorSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Vendor">
+              <PropertyRef Name="VendorID" />
+            </Principal>
+            <Dependent Role="TBL_VendorSoftware">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2276,28 +2380,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TBL_VenderSoftware">
-            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_VenderSoftware">
-              <MappingFragment StoreEntitySet="TBL_VenderSoftware">
-                <ScalarProperty Name="VenderSoftwareID" ColumnName="VenderSoftwareID" />
-                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
-                <ScalarProperty Name="SoftwareID" ColumnName="SoftwareID" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="ExpertiseID" ColumnName="ExpertiseID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TBL_Vendor">
             <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_Vendor">
               <MappingFragment StoreEntitySet="TBL_Vendor">
+                <ScalarProperty Name="AcademicQualificationID" ColumnName="AcademicQualificationID" />
                 <ScalarProperty Name="VendorID" ColumnName="VendorID" />
                 <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
                 <ScalarProperty Name="Vendor" ColumnName="Vendor" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="DateOfAniversary" ColumnName="DateOfAniversary" />
                 <ScalarProperty Name="NativeLanguage" ColumnName="NativeLanguage" />
-                <ScalarProperty Name="AcademicQualification" ColumnName="AcademicQualification" />
                 <ScalarProperty Name="ProfessionalQualification" ColumnName="ProfessionalQualification" />
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
                 <ScalarProperty Name="AlternateEmailID" ColumnName="AlternateEmailID" />
@@ -2310,7 +2402,6 @@
                 <ScalarProperty Name="StateID" ColumnName="StateID" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
                 <ScalarProperty Name="WorkingTime" ColumnName="WorkingTime" />
                 <ScalarProperty Name="RAM" ColumnName="RAM" />
@@ -2368,7 +2459,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="TBL_M_Academics">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_M_Academics">
+              <MappingFragment StoreEntitySet="TBL_M_Academics">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Academics" ColumnName="Academics" />
+                <ScalarProperty Name="AcademicsID" ColumnName="AcademicsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_VendorDomain">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_VendorDomain">
+              <MappingFragment StoreEntitySet="TBL_VendorDomain">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorDomainID" ColumnName="VendorDomainID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_VendorSoftware">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.TBL_VendorSoftware">
+              <MappingFragment StoreEntitySet="TBL_VendorSoftware">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ExpertiseID" ColumnName="ExpertiseID" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="SoftwareID" ColumnName="SoftwareID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorSoftwareID" ColumnName="VendorSoftwareID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
