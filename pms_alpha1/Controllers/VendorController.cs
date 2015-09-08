@@ -32,108 +32,17 @@ namespace pms_alpha1.Controllers
             VendorRegistration vendorRegister = new VendorRegistration();
             var ven = from v in unitOfWork.VendorRepository.Get() select v;
 
-            #region logic for drop down list Domains
-            //logic for drop down list Domains
-            //improve this code ....to directly get the data in the list Format
-            var domainList = from domain in unitOfWork.DomainRepository.Get() select domain;
-            var domainL = new List<cDomain>();
-            if (domainList.Any())
-            {
-                foreach (var d in domainList)
-                {
-                    domainL.Add(new cDomain() { DomainID = d.DomainID, Domain = d.Domain });
-                }
-            }
+            vendorRegister.DomainItems = ExtensionClass.GetDomains();
+            vendorRegister.CountryItems = ExtensionClass.GetCountries();
+            vendorRegister.StateItems = ExtensionClass.GetStates();
+            vendorRegister.CityItems = ExtensionClass.GetCities();
 
-            IEnumerable<cDomain> _Domain_IE = domainL as IEnumerable<cDomain>;
-
-            #endregion
-            vendorRegister.DomainItems = ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain, x => x.DomainID.ToString());
-
-
-            #region logic for drop down list Country
-            //logic for drop down list Country
-            //improve this code ....to directly get the data in the list Format
-            var countryList = from country in unitOfWork.CountryRepository.Get() select country;
-            var countryL = new List<cCountry>();
-            if (countryList.Any())
-            {
-                foreach (var d in countryList)
-                {
-                    countryL.Add(new cCountry() { CountryID = d.CountryID, Country = d.Country });
-                }
-            }
-
-            IEnumerable<cCountry> _Country_IE = countryL as IEnumerable<cCountry>;
-            #endregion
-            vendorRegister.CountryItems = ExtensionClass.ToSelectListItems<cCountry>(countryL, x => x.Country, x => x.CountryID.ToString());
-
-
-            #region logic for drop down list State
-            //logic for drop down list State
-            //improve this code ....to directly get the data in the list Format
-            var stateList = from state in unitOfWork.StateRepository.Get() select state;
-            var stateL = new List<cState>();
-            if (stateList.Any())
-            {
-                foreach (var d in stateList)
-                {
-                    stateL.Add(new cState() { StateID = d.StateID, State = d.State });
-                }
-            }
-
-            IEnumerable<cState> _State_IE = stateL as IEnumerable<cState>;
-            #endregion
-            vendorRegister.StateItems = ExtensionClass.ToSelectListItems<cState>(stateL, x => x.State, x => x.StateID.ToString());
-
-
-            #region logic for drop down list City
-            //logic for drop down list City
-            //improve this code ....to directly get the data in the list Format
-            var cityList = from city in unitOfWork.CityRepository.Get() select city;
-            var cityL = new List<cCity>();
-            if (cityList.Any())
-            {
-                foreach (var d in cityList)
-                {
-                    cityL.Add(new cCity() { CityID = d.CityID, City = d.City });
-                }
-            }
-
-            IEnumerable<cCity> _City_IE = cityL as IEnumerable<cCity>;
-
-            #endregion
-            vendorRegister.CityItems = ExtensionClass.ToSelectListItems<cCity>(cityL, x => x.City, x => x.CityID.ToString());
-
-            List<VendorLanguagePair> LanguagePairList = new List<VendorLanguagePair>{ 
-                                                                ExtensionClass.GetLanguagePair()
-                                                    };
+            List<VendorLanguagePair> LanguagePairList = new List<VendorLanguagePair>{ ExtensionClass.GetLanguagePair() };
             vendorRegister.VendorLanguagePair = LanguagePairList;
-
-            
-            List<VenderSoftware> SoftwareList = new List<VenderSoftware>{ 
-                                                                ExtensionClass.GetSoftware()
-                                                    };
+            List<VenderSoftware> SoftwareList = new List<VenderSoftware>{ ExtensionClass.GetSoftware() };
             vendorRegister.VenderSoftware = SoftwareList;
-
-
-            List<VendorService> ServicesList = new List<VendorService>{ 
-                                                                ExtensionClass.GetServices()
-                                                    };
+            List<VendorService> ServicesList = new List<VendorService>{ ExtensionClass.GetServices() };
             vendorRegister.VendorService = ServicesList;
-
-
-
-
-
-
-
-            //vendorRegister.VendorLanguagePair = new HashSet<VendorLanguagePair>();
-
-            //ViewBag.DomainID = new SelectList(_Domain_IE, "DomainID", "Domain");
-            //ViewBag.StateID = new SelectList(db.TBL_M_State, "StateID", "State");
-            //ViewBag.CityID = new SelectList(db.TBL_M_City, "CityID", "City");
-            //ViewBag.CityID = new SelectList(db.TBL_M_Country, "CountryID", "Country");
 
             return View(vendorRegister);
         }
@@ -177,19 +86,19 @@ namespace pms_alpha1.Controllers
 
         }
 
-        //Add language pair dynamically 
+        //returns the Partial View to Add language pair dynamically 
         public ActionResult AddLanguagePair()
         {
 
             return PartialView("AddLanguagePair", ExtensionClass.GetLanguagePair());
         }
-
+        //returns the Partial View to AddVenderSoftwares dynamically 
         public ActionResult AddVenderSoftwares()
         {
 
             return PartialView("AddVenderSoftwares",ExtensionClass.GetSoftware());
         }
-
+        //returns the Partial View to AddVendorServices dynamically 
         public ActionResult AddVendorServices()
         {
 
@@ -326,11 +235,81 @@ namespace pms_alpha1.Controllers
 
         }
 
+        public static IEnumerable<SelectListItem> GetCities()
+        {
+            //logic for drop down list City
+            //improve this code ....to directly get the data in the list Format
+            var cityList = from city in unitOfWork.CityRepository.Get() select city;
+            var cityL = new List<cCity>();
+            if (cityList.Any())
+            {
+                foreach (var d in cityList)
+                {
+                    cityL.Add(new cCity() { CityID = d.CityID, City = d.City });
+                }
+            }
+
+            IEnumerable<cCity> _City_IE = cityL as IEnumerable<cCity>;
+            return ExtensionClass.ToSelectListItems<cCity>(cityL, x => x.City, x => x.CityID.ToString());
+        }
+
+        public static IEnumerable<SelectListItem> GetStates()
+        {
+            //logic for drop down list State
+            //improve this code ....to directly get the data in the list Format
+            var stateList = from state in unitOfWork.StateRepository.Get() select state;
+            var stateL = new List<cState>();
+            if (stateList.Any())
+            {
+                foreach (var d in stateList)
+                {
+                    stateL.Add(new cState() { StateID = d.StateID, State = d.State });
+                }
+            }
+
+            IEnumerable<cState> _State_IE = stateL as IEnumerable<cState>;
+            return ExtensionClass.ToSelectListItems<cState>(stateL, x => x.State, x => x.StateID.ToString());
+        }
+
+        public static IEnumerable<SelectListItem> GetCountries()
+        {
+            //logic for drop down list Country
+            //improve this code ....to directly get the data in the list Format
+            var countryList = from country in unitOfWork.CountryRepository.Get() select country;
+            var countryL = new List<cCountry>();
+            if (countryList.Any())
+            {
+                foreach (var d in countryList)
+                {
+                    countryL.Add(new cCountry() { CountryID = d.CountryID, Country = d.Country });
+                }
+            }
+
+            IEnumerable<cCountry> _Country_IE = countryL as IEnumerable<cCountry>;
+            return ExtensionClass.ToSelectListItems<cCountry>(countryL, x => x.Country, x => x.CountryID.ToString());
+        }
+
+        public static IEnumerable<SelectListItem> GetDomains() 
+        {
+            //logic for drop down list Domains
+            //improve this code ....to directly get the data in the list Format
+            var domainList = from domain in unitOfWork.DomainRepository.Get() select domain;
+            var domainL = new List<cDomain>();
+            if (domainList.Any())
+            {
+                foreach (var d in domainList)
+                {
+                    domainL.Add(new cDomain() { DomainID = d.DomainID, Domain = d.Domain });
+                }
+            }
+
+            IEnumerable<cDomain> _Domain_IE = domainL as IEnumerable<cDomain>;
+            return ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain, x => x.DomainID.ToString());
+        }
+
+
+
         #endregion
-
-
-
-
 
 
         //public static IEnumerable<T> ToEnum(var list)
@@ -341,9 +320,7 @@ namespace pms_alpha1.Controllers
 
 
 
-
-
-
+        #region To convert any the List<T> or IEnumerable<T> to the IEnumerable<selectlistItem>
         /// <summary>
         /// To convert any the List<T> or IEnumerable<T> to the IEnumerable<selectlistItem>
         /// </summary>
@@ -366,9 +343,10 @@ namespace pms_alpha1.Controllers
                     //Selected = isSelectedSelector(obj)
                 });
 
-        }
+        } 
+        #endregion
 
-
+        #region To convert any the List<cDomain> or IEnumerable<cDomain> to the IEnumerable<selectlistItem>.
         /// <summary>
         /// To convert any the List<cDomain> or IEnumerable<cDomain> to the IEnumerable<selectlistItem>.
         /// </summary>
@@ -387,7 +365,8 @@ namespace pms_alpha1.Controllers
                               Text = s.Domain,
                               Value = s.DomainID.ToString()
                           });
-        }
+        } 
+        #endregion
 
         //public static List<T> LanguageList(List languageList)
         //{
