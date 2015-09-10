@@ -63,10 +63,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AcademicQualification, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AcademicQualificationID , htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AcademicQualification, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AcademicQualification, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.AcademicQualificationID, Model.AcademicsItems, htmlAttributes: new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.AcademicQualification, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.AcademicQualificationID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -170,13 +171,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DomainID, "DomainID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.DomainID, Model.DomainItems, htmlAttributes: new { @class = "form-control" })
-                @*@Html.DropDownList("DomainID", null, htmlAttributes: new { @class = "form-control" })*@
+            <label class="control-label col-md-2">Domain</label>  
+            @foreach (var item in Model.DomainLists)
+            {
+                @Html.Partial("AddVendorDomain", item)
 
-                @Html.ValidationMessageFor(model => model.DomainID, "", new { @class = "text-danger" })
-            </div>
+            }
+
+
         </div>
 
         <div class="form-group">
@@ -427,7 +429,7 @@
             }
             @Html.ActionLink("Add", "AddLanguagePair", null, new { id = "addLanguagePairItem" })
         </div>
-       
+
 
         <br />
         <br />

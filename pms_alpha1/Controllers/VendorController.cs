@@ -32,10 +32,13 @@ namespace pms_alpha1.Controllers
             VendorRegistration vendorRegister = new VendorRegistration();
             var ven = from v in unitOfWork.VendorRepository.Get() select v;
 
-            vendorRegister.DomainItems = ExtensionClass.GetDomains();
+            //vendorRegister.DomainItems = ExtensionClass.GetDomains();
+            vendorRegister.DomainLists = ExtensionClass.GetDomains();
+            
             vendorRegister.CountryItems = ExtensionClass.GetCountries();
             vendorRegister.StateItems = ExtensionClass.GetStates();
             vendorRegister.CityItems = ExtensionClass.GetCities();
+            vendorRegister.AcademicsItems = ExtensionClass.GetAcademics();
 
             List<VendorLanguagePair> LanguagePairList = new List<VendorLanguagePair>{ ExtensionClass.GetLanguagePair() };
             vendorRegister.VendorLanguagePair = LanguagePairList;
@@ -67,9 +70,22 @@ namespace pms_alpha1.Controllers
                     var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
                 }
                 //create mapping
-                Mapper.CreateMap<VendorRegistration, TBL_Vendor>();
-
+                Mapper.CreateMap<VendorRegistration, TBL_Vendor>()
+                                .ForMember(v => v.TBL_M_Academics,option => option.Ignore())
+                                .ForMember(v => v.TBL_M_City,option => option.Ignore())
+                                .ForMember(v => v.TBL_M_Country,option => option.Ignore())
+                                .ForMember(v => v.TBL_M_State,option => option.Ignore())
+                                .ForMember(v => v.TBL_TrackerPC,option => option.Ignore())
+                                .ForMember(v => v.TBL_TrackerSPC,option => option.Ignore())
+                                .ForMember(v => v.TBL_VendorLanguagePair,option => option.Ignore())
+                                .ForMember(v => v.TBL_VendorService,option => option.Ignore())
+                                .ForMember(v => v.TBL_VendorDomain,option => option.Ignore())
+                                .ForMember(v => v.TBL_VendorSoftware,option => option.Ignore())
+                                ;
+                
                 TBL_Vendor tbl_Vendor = Mapper.Map<VendorRegistration, TBL_Vendor>(vendorRegister);
+                
+                //TBL_Vendor tbl_Vendor = Mapper.Map<VendorRegistration, TBL_Vendor>(vendorRegister);
                 unitOfWork.VendorRepository.Insert(tbl_Vendor);
 
                 unitOfWork.Save();
@@ -289,7 +305,7 @@ namespace pms_alpha1.Controllers
             return ExtensionClass.ToSelectListItems<cCountry>(countryL, x => x.Country, x => x.CountryID.ToString());
         }
 
-        public static IEnumerable<SelectListItem> GetDomains() 
+        public static List<cDomain> GetDomains() 
         {
             //logic for drop down list Domains
             //improve this code ....to directly get the data in the list Format
@@ -302,12 +318,29 @@ namespace pms_alpha1.Controllers
                     domainL.Add(new cDomain() { DomainID = d.DomainID, Domain = d.Domain });
                 }
             }
-
-            IEnumerable<cDomain> _Domain_IE = domainL as IEnumerable<cDomain>;
-            return ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain, x => x.DomainID.ToString());
+            return domainL;
+            //IEnumerable<cDomain> _Domain_IE = domainL as IEnumerable<cDomain>;
+            //return ExtensionClass.ToSelectListItems<cDomain>(domainL, x => x.Domain, x => x.DomainID.ToString());
         }
 
 
+
+        public static IEnumerable<SelectListItem> GetAcademics()
+        {
+            //logic for drop down list Academics
+            //improve this code ....to directly get the data in the list Format
+            var academicsList = from academics in unitOfWork.AcademicsRepository.Get() select academics;
+            var academicsL = new List<TBL_M_Academics>();
+            if (academicsList.Any())
+            {
+                foreach (var d in academicsList)
+                {
+                    academicsL.Add(new TBL_M_Academics() { AcademicsID = d.AcademicsID, Academics= d.Academics });
+                }
+            }
+
+            return ExtensionClass.ToSelectListItems<TBL_M_Academics>(academicsL, x => x.Academics, x => x.AcademicsID.ToString());
+        }
 
         #endregion
 

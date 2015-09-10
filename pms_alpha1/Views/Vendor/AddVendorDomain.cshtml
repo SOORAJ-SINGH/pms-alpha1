@@ -1,0 +1,15 @@
+﻿@using pms_alpha1.Helpers
+@model pms_alpha1.ViewModels.cDomain
+
+<div class="AddVendorDomains">
+    @using (Html.BeginCollectionItem("DomainLists"))
+    {
+        @*<b>Source Language:</b>  @Html.DropDownListFor(model => model.SourceLanguageID, Model.LanguageSourceItems, htmlAttributes: new { @class = "form-control" })
+        <b>Target Language:</b>    @Html.DropDownListFor(model => model.TargetLanguageID, Model.LanguageTargetItems, htmlAttributes: new { @class = "form-control" })*@
+
+        @Html.CheckBoxFor(model => model.Selected, Model.Selected)
+        @Html.HiddenFor(model => model.DomainID,Model.DomainID)
+        @Html.DisplayFor(model => model.Domain, Model.Domain)
+    }
+
+</div>

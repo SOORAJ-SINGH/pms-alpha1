@@ -18,6 +18,7 @@ namespace pms_alpha1
         {
             this.TBL_M_State = new HashSet<TBL_M_State>();
             this.TBL_Vendor = new HashSet<TBL_Vendor>();
+            this.TBL_Vendor1 = new HashSet<TBL_Vendor>();
         }
     
         public int CountryID { get; set; }
@@ -26,5 +27,6 @@ namespace pms_alpha1
     
         public virtual ICollection<TBL_M_State> TBL_M_State { get; set; }
         public virtual ICollection<TBL_Vendor> TBL_Vendor { get; set; }
+        public virtual ICollection<TBL_Vendor> TBL_Vendor1 { get; set; }
     }
 }

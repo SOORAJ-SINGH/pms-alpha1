@@ -5,6 +5,26 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="somyatrans_pmsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Internal_FK_Definition_Storage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FK_CreationStatement" Type="varchar(max)" Nullable="false" />
+          <Property Name="FK_DestructionStatement" Type="varchar(max)" Nullable="false" />
+          <Property Name="Table_TruncationStatement" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TBL_Client">
           <Key>
             <PropertyRef Name="ClientID" />
@@ -663,7 +683,7 @@
               <PropertyRef Name="CountryID" />
             </Principal>
             <Dependent Role="TBL_Vendor">
-              <PropertyRef Name="CityID" />
+              <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -824,6 +844,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="somyatrans_pmsDBModelStoreContainer">
+          <EntitySet Name="Internal_FK_Definition_Storage" EntityType="Self.Internal_FK_Definition_Storage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_Client" EntityType="Self.TBL_Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ClientPM" EntityType="Self.TBL_ClientPM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_M_Academics" EntityType="Self.TBL_M_Academics" Schema="dbo" store:Type="Tables" />
@@ -1070,6 +1092,7 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TBL_M_State" Relationship="Self.FK_TBL_M_State_TBL_M_Country" FromRole="TBL_M_Country" ToRole="TBL_M_State" />
           <NavigationProperty Name="TBL_Vendor" Relationship="Self.FK_TBL_Vendor_TBL_M_Country" FromRole="TBL_M_Country" ToRole="TBL_Vendor" />
+          <NavigationProperty Name="TBL_Vendor1" Relationship="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Country1" FromRole="TBL_M_Country" ToRole="TBL_Vendor" />
         </EntityType>
         <EntityType Name="TBL_M_Currency">
           <Key>
@@ -1385,6 +1408,7 @@
           <NavigationProperty Name="TBL_M_Academics" Relationship="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Academics" FromRole="TBL_Vendor" ToRole="TBL_M_Academics1" />
           <NavigationProperty Name="TBL_VendorDomain" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorDomain1" />
           <NavigationProperty Name="TBL_VendorSoftware" Relationship="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_Vendor" FromRole="TBL_Vendor" ToRole="TBL_VendorSoftware" />
+          <NavigationProperty Name="TBL_M_Country1" Relationship="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Country1" FromRole="TBL_Vendor" ToRole="TBL_M_Country" />
         </EntityType>
         <EntityType Name="TBL_VendorLanguagePair">
           <Key>
@@ -1984,6 +2008,12 @@
             <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
             <End Role="TBL_VendorSoftware" EntitySet="TBL_VendorSoftware" />
           </AssociationSet>
+          <EntitySet Name="Internal_FK_Definition_Storage" EntityType="somyatrans_pmsDBModel.Internal_FK_Definition_Storage" />
+          <EntitySet Name="sysdiagrams" EntityType="somyatrans_pmsDBModel.sysdiagram" />
+          <AssociationSet Name="FK_TBL_Vendor_TBL_M_Country1" Association="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Country1">
+            <End Role="TBL_M_Country" EntitySet="TBL_M_Country" />
+            <End Role="TBL_Vendor" EntitySet="TBL_Vendor" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="TBL_M_Academics">
           <Key>
@@ -2088,6 +2118,38 @@
             </Principal>
             <Dependent Role="TBL_VendorSoftware">
               <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Internal_FK_Definition_Storage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FK_CreationStatement" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_DestructionStatement" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Table_TruncationStatement" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_TBL_Vendor_TBL_M_Country1">
+          <End Type="somyatrans_pmsDBModel.TBL_M_Country" Role="TBL_M_Country" Multiplicity="0..1" />
+          <End Type="somyatrans_pmsDBModel.TBL_Vendor" Role="TBL_Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_M_Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TBL_Vendor">
+              <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2487,6 +2549,28 @@
                 <ScalarProperty Name="SoftwareID" ColumnName="SoftwareID" />
                 <ScalarProperty Name="VendorID" ColumnName="VendorID" />
                 <ScalarProperty Name="VendorSoftwareID" ColumnName="VendorSoftwareID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Internal_FK_Definition_Storage">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.Internal_FK_Definition_Storage">
+              <MappingFragment StoreEntitySet="Internal_FK_Definition_Storage">
+                <ScalarProperty Name="Table_TruncationStatement" ColumnName="Table_TruncationStatement" />
+                <ScalarProperty Name="FK_DestructionStatement" ColumnName="FK_DestructionStatement" />
+                <ScalarProperty Name="FK_CreationStatement" ColumnName="FK_CreationStatement" />
+                <ScalarProperty Name="FK_Name" ColumnName="FK_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="somyatrans_pmsDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

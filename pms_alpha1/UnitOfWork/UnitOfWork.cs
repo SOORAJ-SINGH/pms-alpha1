@@ -15,6 +15,7 @@ namespace pms_alpha1.UnitOfWork
         private GenericRepository<TBL_M_Country> countryRepository;
         private GenericRepository<TBL_M_State> stateRepository;
         private GenericRepository<TBL_M_City> cityRepository;
+        private GenericRepository<TBL_M_Academics> academicsRepository; 
 
         private GenericRepository<TBL_M_Language> languageRepository;
         private GenericRepository<TBL_M_Software> vendorSoftwareRepository;
@@ -83,6 +84,18 @@ namespace pms_alpha1.UnitOfWork
 
                 }
                 return cityRepository;
+            }
+        }
+        public GenericRepository<TBL_M_Academics> AcademicsRepository
+        {
+            get
+            {
+                if (this.academicsRepository == null)
+                {
+                    this.academicsRepository = new GenericRepository<TBL_M_Academics>(dbContext);
+
+                }
+                return academicsRepository;
             }
         }
 

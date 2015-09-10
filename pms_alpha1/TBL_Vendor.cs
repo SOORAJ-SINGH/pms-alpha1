@@ -83,5 +83,6 @@ namespace pms_alpha1
         public virtual TBL_M_Academics TBL_M_Academics { get; set; }
         public virtual ICollection<TBL_VendorDomain> TBL_VendorDomain { get; set; }
         public virtual ICollection<TBL_VendorSoftware> TBL_VendorSoftware { get; set; }
+        public virtual TBL_M_Country TBL_M_Country1 { get; set; }
     }
 }

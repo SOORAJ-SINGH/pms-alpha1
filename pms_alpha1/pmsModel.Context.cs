@@ -56,5 +56,7 @@ namespace pms_alpha1
         public virtual DbSet<TBL_M_Academics> TBL_M_Academics { get; set; }
         public virtual DbSet<TBL_VendorDomain> TBL_VendorDomain { get; set; }
         public virtual DbSet<TBL_VendorSoftware> TBL_VendorSoftware { get; set; }
+        public virtual DbSet<Internal_FK_Definition_Storage> Internal_FK_Definition_Storage { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

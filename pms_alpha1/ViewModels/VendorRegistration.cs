@@ -28,7 +28,7 @@ namespace pms_alpha1.ViewModels
         [Display(Name = "Native Language")]
         public string NativeLanguage { get; set; }
         [Display(Name = "Academic Qualification")]
-        public string AcademicQualification { get; set; }
+        public Int32 AcademicQualificationID { get; set; }
         [Display(Name = "Professional Qualification")]
         public string ProfessionalQualification { get; set; }
         [Display(Name = "Email ID")]
@@ -55,8 +55,7 @@ namespace pms_alpha1.ViewModels
         public Nullable<int> CountryID { get; set; }
         [Display(Name = "Pin Code")]
         public string PinCode { get; set; }
-        [Display(Name = "Academic")]
-        public Nullable<int> DomainID { get; set; }
+
         public string Capacity { get; set; }
         public Nullable<System.TimeSpan> WorkingTime { get; set; }
         public string RAM { get; set; }
@@ -112,13 +111,18 @@ namespace pms_alpha1.ViewModels
         public Nullable<bool> Status { get; set; }
 
 
+
+
+
         public virtual cCity City { get; set; }
         public virtual cCountry Country { get; set; }
-        public virtual TBL_M_Domain Domain { get ; set; }
+        
         public virtual cState State { get; set; }
 
 
-        private readonly List<TBL_M_Domain> _cDomain = new List<TBL_M_Domain>();
+
+
+
         //public IEnumerable<TBL_M_Domain> DomainItems
         //{
         //    get { return _cDomain; }
@@ -126,20 +130,23 @@ namespace pms_alpha1.ViewModels
 
 
         //To Display the DropDownList 
-        public IEnumerable<SelectListItem> DomainItems {get;set;}
+
         public IEnumerable<SelectListItem> CountryItems { get; set; }
         public IEnumerable<SelectListItem> StateItems { get; set; }
         public IEnumerable<SelectListItem> CityItems { get; set; }
+        public IEnumerable<SelectListItem> AcademicsItems { get; set; }
 
 
-
-
+        //Vendor can have multiple domains 
+        public virtual ICollection<VendorDomain> VendorDomain { get; set; } 
         public virtual ICollection<VendorSoftware> VendorSoftware { get; set; }
         //public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
         public virtual ICollection<VendorLanguagePair> VendorLanguagePair { get; set; }
         public virtual ICollection<VendorService> VendorService { get; set; }
 
-       
+       //for check box generation of Domains..
+        public List<cDomain> DomainLists { get; set; }
+
         
 
     }
@@ -177,6 +184,7 @@ namespace pms_alpha1.ViewModels
         public int DomainID { get; set; }
         public string Domain { get; set; }
         public bool Staus { get; set; }
+        public bool Selected { get; set; }
     }
 
     public class cLanguage
@@ -184,6 +192,17 @@ namespace pms_alpha1.ViewModels
         public int LanguageID { get; set; }
         public string Language { get; set; }
         public bool Staus { get; set; }
+    }
+
+    public class VendorDomain
+    {
+        public int VendorDomainID{get;set;}
+        public int VendorID { get; set; }
+        public int DomainID {get;set;}
+        public string Domain { get; set; }
+        //public List<cDomain> DomainList { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public bool Selected { get; set; }
     }
 
     public class VendorSoftware
