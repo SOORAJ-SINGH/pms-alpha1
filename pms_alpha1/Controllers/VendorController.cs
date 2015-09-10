@@ -69,6 +69,7 @@ namespace pms_alpha1.Controllers
                     bool hasErrors = ViewData.ModelState.Values.Any(x => x.Errors.Count > 1);
                     var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
                 }
+
                 //create mapping
                 Mapper.CreateMap<VendorRegistration, TBL_Vendor>()
                                 .ForMember(v => v.TBL_M_Academics,option => option.Ignore())
@@ -82,13 +83,72 @@ namespace pms_alpha1.Controllers
                                 .ForMember(v => v.TBL_VendorDomain,option => option.Ignore())
                                 .ForMember(v => v.TBL_VendorSoftware,option => option.Ignore())
                                 ;
-                
-                TBL_Vendor tbl_Vendor = Mapper.Map<VendorRegistration, TBL_Vendor>(vendorRegister);
-                
-                //TBL_Vendor tbl_Vendor = Mapper.Map<VendorRegistration, TBL_Vendor>(vendorRegister);
-                unitOfWork.VendorRepository.Insert(tbl_Vendor);
+                Mapper.CreateMap<VendorService, TBL_VendorService>()
+                                .ForMember(v => v.TBL_M_Currency, option => option.Ignore())
+                                .ForMember(v => v.TBL_M_Currency1, option => option.Ignore())
+                                .ForMember(v => v.TBL_M_Services, option => option.Ignore())
+                                .ForMember(v => v.TBL_Vendor, option => option.Ignore())
+                                ;
 
+                Mapper.CreateMap<VendorSoftware, TBL_VendorSoftware>()
+                                .ForMember(v => v.TBL_M_Expertise, option => option.Ignore())
+                                .ForMember(v => v.TBL_M_Software, option => option.Ignore())
+                                .ForMember(v => v.TBL_Vendor, option => option.Ignore())
+                                ;
+                Mapper.CreateMap<cDomain, TBL_VendorDomain>()
+                                .ForMember(v => v.TBL_M_Domain, option => option.Ignore())
+                                .ForMember(v => v.TBL_Vendor, option => option.Ignore())
+                                ;
+
+                Mapper.CreateMap<VendorLanguagePair, TBL_VendorLanguagePair>()
+                                .ForMember(v => v.TBL_M_Language, option => option.Ignore())
+                                .ForMember(v => v.TBL_M_Language1, option => option.Ignore())
+                                .ForMember(v => v.TBL_Vendor, option => option.Ignore())
+                                ;
+
+
+                TBL_Vendor tbl_Vendor = Mapper.Map<VendorRegistration, TBL_Vendor>(vendorRegister);
+            
+                unitOfWork.VendorRepository.Insert(tbl_Vendor);
                 unitOfWork.Save();
+
+                foreach (var languagePair in vendorRegister.VendorLanguagePair)
+                {
+                    TBL_VendorLanguagePair tbl_VendorLanguagePair = Mapper.Map<VendorLanguagePair, TBL_VendorLanguagePair>(languagePair);
+                    tbl_VendorLanguagePair.VendorID = tbl_Vendor.VendorID;
+                    tbl_VendorLanguagePair.Status = true;
+                    unitOfWork.VendorLanguagePair.Insert(tbl_VendorLanguagePair);
+                }
+
+                //unitOfWork.Save();
+                foreach (var service in vendorRegister.VendorService)
+                {
+                    TBL_VendorService tbl_VendorService = Mapper.Map<VendorService, TBL_VendorService>(service);
+                    tbl_VendorService.VendorID = tbl_Vendor.VendorID;
+                    tbl_VendorService.Status = true;
+                    unitOfWork.VendorService.Insert(tbl_VendorService);
+                }
+                foreach (var Software in vendorRegister.VendorSoftware)
+                {
+                    TBL_VendorSoftware tbl_VendorSoftware = Mapper.Map<VendorSoftware, TBL_VendorSoftware>(Software);
+                    tbl_VendorSoftware.VendorID = tbl_Vendor.VendorID;
+                    tbl_VendorSoftware.Status = true;
+                    unitOfWork.VendorSoftware.Insert(tbl_VendorSoftware);
+                }
+                foreach (var domain in vendorRegister.DomainLists)
+                {
+                    if (domain.Selected)
+                    {
+                        TBL_VendorDomain tbl_VendorDomain = Mapper.Map<cDomain, TBL_VendorDomain>(domain);
+                        tbl_VendorDomain.VendorID = tbl_Vendor.VendorID;
+                        tbl_VendorDomain.Status = true;
+                        unitOfWork.VendorDomain.Insert(tbl_VendorDomain);
+                        
+                    }
+                    
+                }
+                unitOfWork.Save();
+                
 
                 return RedirectToAction("Index");
 
@@ -96,8 +156,8 @@ namespace pms_alpha1.Controllers
             }
             catch (Exception ex)
             {
-
-                return View();
+                return RedirectToAction("Index");
+                //return View();
             }
 
         }
@@ -136,7 +196,7 @@ namespace pms_alpha1.Controllers
         {
             //logic for drop down list Softwares Names and Expertise
             //improve this code ....to directly get the data in the list Format
-            var softwareList = from software in unitOfWork.VendorSoftwareRepository.Get() select software;
+            var softwareList = from software in unitOfWork.M_SoftwareRepository.Get() select software;
 
             var softwareL = new List<VendorSoftware>();
 
@@ -148,7 +208,7 @@ namespace pms_alpha1.Controllers
                 }
             }
 
-            var expertiseList = from expertise in unitOfWork.VendorExpertiseRepository.Get() select expertise;
+            var expertiseList = from expertise in unitOfWork.M_ExpertiseRepository.Get() select expertise;
 
             var expertiseL = new List<TBL_M_Expertise>();
 
@@ -177,7 +237,7 @@ namespace pms_alpha1.Controllers
             //logic for drop down list Language
             //improve this code ....to directly get the data in the list Format
 
-            var languageList = from language in unitOfWork.LanguageRepository.Get() select language;
+            var languageList = from language in unitOfWork.M_LanguageRepository.Get() select language;
 
             var languageSourceL = new List<VendorLanguagePair>();
             var languageTargetL = new List<VendorLanguagePair>();
@@ -210,7 +270,7 @@ namespace pms_alpha1.Controllers
             //logic for drop down list Language
             //improve this code ....to directly get the data in the list Format
 
-            var serviceList = from service in unitOfWork.ServicesRepository.Get() select service;
+            var serviceList = from service in unitOfWork.M_ServicesRepository.Get() select service;
 
             var serviceL = new List<TBL_M_Services>();
             
@@ -224,7 +284,7 @@ namespace pms_alpha1.Controllers
                 }
             }
 
-            var currencyList = from currency in unitOfWork.CurrencyRepository.Get() select currency;
+            var currencyList = from currency in unitOfWork.M_CurrencyRepository.Get() select currency;
 
             var currencyQuotedL = new List<VendorService>();
             var currencyFreezedL = new List<VendorService>();
@@ -255,7 +315,7 @@ namespace pms_alpha1.Controllers
         {
             //logic for drop down list City
             //improve this code ....to directly get the data in the list Format
-            var cityList = from city in unitOfWork.CityRepository.Get() select city;
+            var cityList = from city in unitOfWork.M_CityRepository.Get() select city;
             var cityL = new List<cCity>();
             if (cityList.Any())
             {
@@ -273,7 +333,7 @@ namespace pms_alpha1.Controllers
         {
             //logic for drop down list State
             //improve this code ....to directly get the data in the list Format
-            var stateList = from state in unitOfWork.StateRepository.Get() select state;
+            var stateList = from state in unitOfWork.M_StateRepository.Get() select state;
             var stateL = new List<cState>();
             if (stateList.Any())
             {
@@ -291,7 +351,7 @@ namespace pms_alpha1.Controllers
         {
             //logic for drop down list Country
             //improve this code ....to directly get the data in the list Format
-            var countryList = from country in unitOfWork.CountryRepository.Get() select country;
+            var countryList = from country in unitOfWork.M_CountryRepository.Get() select country;
             var countryL = new List<cCountry>();
             if (countryList.Any())
             {
@@ -309,7 +369,7 @@ namespace pms_alpha1.Controllers
         {
             //logic for drop down list Domains
             //improve this code ....to directly get the data in the list Format
-            var domainList = from domain in unitOfWork.DomainRepository.Get() select domain;
+            var domainList = from domain in unitOfWork.M_DomainRepository.Get() select domain;
             var domainL = new List<cDomain>();
             if (domainList.Any())
             {
@@ -329,7 +389,7 @@ namespace pms_alpha1.Controllers
         {
             //logic for drop down list Academics
             //improve this code ....to directly get the data in the list Format
-            var academicsList = from academics in unitOfWork.AcademicsRepository.Get() select academics;
+            var academicsList = from academics in unitOfWork.M_AcademicsRepository.Get() select academics;
             var academicsL = new List<TBL_M_Academics>();
             if (academicsList.Any())
             {

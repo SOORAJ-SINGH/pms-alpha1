@@ -357,7 +357,7 @@
           <Key>
             <PropertyRef Name="VendorLanguagePairID" />
           </Key>
-          <Property Name="VendorLanguagePairID" Type="bigint" Nullable="false" />
+          <Property Name="VendorLanguagePairID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorID" Type="int" />
           <Property Name="SourceLanguageID" Type="int" />
           <Property Name="TargetLanguageID" Type="int" />
@@ -367,7 +367,7 @@
           <Key>
             <PropertyRef Name="VendorServiceID" />
           </Key>
-          <Property Name="VendorServiceID" Type="bigint" Nullable="false" />
+          <Property Name="VendorServiceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorID" Type="int" />
           <Property Name="ServiceID" Type="int" />
           <Property Name="QuotedCurrencyID" Type="int" />
@@ -380,7 +380,7 @@
           <Key>
             <PropertyRef Name="VendorSoftwareID" />
           </Key>
-          <Property Name="VendorSoftwareID" Type="bigint" Nullable="false" />
+          <Property Name="VendorSoftwareID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorID" Type="int" />
           <Property Name="SoftwareID" Type="int" />
           <Property Name="Version" Type="varchar" MaxLength="50" />
@@ -1414,7 +1414,7 @@
           <Key>
             <PropertyRef Name="VendorLanguagePairID" />
           </Key>
-          <Property Name="VendorLanguagePairID" Type="Int64" Nullable="false" />
+          <Property Name="VendorLanguagePairID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VendorID" Type="Int32" />
           <Property Name="SourceLanguageID" Type="Int32" />
           <Property Name="TargetLanguageID" Type="Int32" />
@@ -1427,7 +1427,7 @@
           <Key>
             <PropertyRef Name="VendorServiceID" />
           </Key>
-          <Property Name="VendorServiceID" Type="Int64" Nullable="false" />
+          <Property Name="VendorServiceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VendorID" Type="Int32" />
           <Property Name="ServiceID" Type="Int32" />
           <Property Name="QuotedCurrencyID" Type="Int32" />
@@ -2039,7 +2039,7 @@
           <Key>
             <PropertyRef Name="VendorSoftwareID" />
           </Key>
-          <Property Name="VendorSoftwareID" Type="Int64" Nullable="false" />
+          <Property Name="VendorSoftwareID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VendorID" Type="Int32" />
           <Property Name="SoftwareID" Type="Int32" />
           <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
