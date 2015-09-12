@@ -172,9 +172,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
-    <Compile Include="Internal_FK_Definition_Storage.cs">
-      <DependentUpon>pmsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -195,9 +192,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>pmsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TBL_Client.cs">
       <DependentUpon>pmsModel.tt</DependentUpon>
     </Compile>

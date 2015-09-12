@@ -75,8 +75,6 @@
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_M_Software" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorDomain_TBL_Vendor" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_VendorSoftware_TBL_Vendor" />
-        <EntityTypeShape EntityType="somyatrans_pmsDBModel.Internal_FK_Definition_Storage" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="somyatrans_pmsDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" />
         <AssociationConnector Association="somyatrans_pmsDBModel.FK_TBL_Vendor_TBL_M_Country1" />
       </Diagram>
     </edmx:Diagrams>
